@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import { TestForm } from "~/features/Test/TestForm";
 import type { TestFormValues } from "~/constants/types/TestFormValues";

@@ -22,9 +22,9 @@ export default function TestCreatePage() {
     formState: { errors, isSubmitting },
   } = useTestForm();
 
+  const navigate = useNavigate();
   const { mutateAsync: addTest, isPending: isAddTestPending } =
     useAddTestMutation();
-  const navigate = useNavigate();
 
   const onSubmit = async (formData: TestFormValues) => {
     try {

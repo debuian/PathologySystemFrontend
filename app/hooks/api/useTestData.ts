@@ -16,7 +16,7 @@ interface Test {
   name: string;
   price: number;
   testUnit: TestUnit | null;
-  testType: TestType | null;
+  medicalDepartment: TestType | null;
   categoryMappings: CategoryMapping[];
   normalRangeMin: number;
   normalRangeMax: number;

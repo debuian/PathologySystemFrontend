@@ -29,7 +29,6 @@ import type { TestFormValues } from "~/constants/types/TestFormValues";
 import { useTestCategoriesData } from "~/hooks/api/useTestCategoriesData";
 import {
   Controller,
-  useForm,
   type Control,
   type FieldErrors,
   type UseFormHandleSubmit,
@@ -84,6 +83,7 @@ export const TestForm = ({
       .join(", ");
   };
   const formSubmit = async (data: TestFormValues) => {
+    console.log(data);
     try {
       await onSubmit(data);
     } catch (error) {}
@@ -175,11 +175,11 @@ export const TestForm = ({
         </div>
 
         <div className="space-y-2">
-          <label htmlFor="testTypeId">Test Type</label>
+          <label htmlFor="medicalDepartmentId">Department</label>
           <Controller
-            name="testTypeId"
+            name="medicalDepartmentId"
             control={control}
-            rules={{ required: "Test Type is required" }}
+            rules={{ required: "Medical Department is required" }}
             render={({ field }) => (
               <Select
                 value={field.value}

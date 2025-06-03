@@ -8,7 +8,6 @@ interface ModalProps {
 }
 
 export default function Modal({ children, open, setOpen }: ModalProps) {
-  React.useEffect(() => console.log(children));
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       {children}

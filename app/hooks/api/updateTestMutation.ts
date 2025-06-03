@@ -14,15 +14,9 @@ export const useUpdateTestMutation = (id: string) => {
       console.log("Inside Updae fun");
       const response = await axiosInstance.patch(`/tests/${id}`, {
         ...formData,
-        price: Number(formData.price),
-        normalRangeMin: Number(formData.normalRangeMin),
-        normalRangeMax: Number(formData.normalRangeMax),
       });
       console.log(response.data);
       return response.data;
-      //   return new Promise((resolve, rejects) => {
-      //     setTimeout(() => resolve(response.data), 4000);
-      //   });
     },
     onError: (error) => {
       console.error("Error creating test:", error);

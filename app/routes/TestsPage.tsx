@@ -18,8 +18,11 @@ import {
 } from "~/components/ui/table";
 import { useTestsData } from "~/hooks/api/useTestData";
 import type { TestFormValues } from "~/constants/types/TestFormValues";
-import { Dialog, DialogDescription } from "~/components/ui/dialog";
-import { DialogContent, DialogTitle } from "~/components/ui/dialog";
+import {
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+} from "~/components/ui/dialog";
 import TestEdit from "../features/Test/TestEdit";
 import DeleteTest from "~/features/Test/DeleteTest";
 import Pagination from "~/components/Pagination";
@@ -45,8 +48,7 @@ export default function Test() {
   };
 
   const { data } = useTestsData(currentPage, itemsPerPage);
-  console.log(currentPage, itemsPerPage);
-
+  console.log(data);
   return (
     <>
       <Modal open={isOpen} setOpen={setIsOpen}>
@@ -98,7 +100,7 @@ export default function Test() {
                 <TableHead className="font-medium">Name</TableHead>
                 <TableHead className="font-medium">Price</TableHead>
                 <TableHead className="font-medium">Unit</TableHead>
-                <TableHead className="font-medium">Type</TableHead>
+                <TableHead className="font-medium">Department</TableHead>
                 <TableHead className="font-medium">Normal Min Value</TableHead>
                 <TableHead className="font-medium">Normal Max Value</TableHead>
                 <TableHead className="font-medium">Categories</TableHead>
@@ -124,9 +126,10 @@ export default function Test() {
                       </span>
                     </TableCell>
                     <TableCell>
-                      {test?.testType?.name && test?.testType?.name.length > 25
-                        ? `${test.testType.name.slice(0, 25)}...`
-                        : test?.testType?.name}
+                      {test?.medicalDepartment?.name &&
+                      test?.medicalDepartment?.name.length > 25
+                        ? `${test.medicalDepartment.name.slice(0, 25)}...`
+                        : test?.medicalDepartment?.name}
                     </TableCell>
                     <TableCell className="text-center">
                       {test?.normalRangeMin}
@@ -160,7 +163,7 @@ export default function Test() {
                               price: String(test?.price),
                               normalRangeMax: String(test.normalRangeMax),
                               normalRangeMin: String(test.normalRangeMin),
-                              testTypeId: test.testType?.id!,
+                              medicalDepartmentId: test.medicalDepartment?.id!,
                               testUnitId: test?.testUnit?.id!,
                               categoryIds: test?.categoryMappings?.map(
                                 (category) => category.category.id
@@ -181,7 +184,7 @@ export default function Test() {
                               price: String(test?.price),
                               normalRangeMax: String(test.normalRangeMax),
                               normalRangeMin: String(test.normalRangeMin),
-                              testTypeId: test.testType?.id!,
+                              medicalDepartmentId: test.medicalDepartment?.id!,
                               testUnitId: test?.testUnit?.id!,
                               categoryIds: test?.categoryMappings?.map(
                                 (category) => category.category.id

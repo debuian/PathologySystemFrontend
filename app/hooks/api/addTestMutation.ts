@@ -10,14 +10,7 @@ export const useAddTestMutation = () => {
 
   return useMutation({
     mutationFn: async (formData: TestFormValues) => {
-      console.log(formData);
-
-      const response = await axiosInstance.post("/tests", {
-        ...formData,
-        price: Number(formData.price),
-        normalRangeMin: Number(formData.normalRangeMin),
-        normalRangeMax: Number(formData.normalRangeMax),
-      });
+      const response = await axiosInstance.post("/tests", formData);
       console.log(response.data);
       return response.data;
       //   return new Promise((resolve, rejects) => {

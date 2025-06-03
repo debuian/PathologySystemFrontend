@@ -15,7 +15,7 @@ export const useTestForm = (initialData?: TestFormValues) => {
       name: "",
       price: "",
       testUnitId: "",
-      testTypeId: "",
+      medicalDepartmentId: "",
       categoryIds: [],
       normalRangeMin: "",
       normalRangeMax: "",

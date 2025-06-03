@@ -2,7 +2,7 @@ export interface TestFormValues {
   name: string;
   price: string;
   testUnitId: string;
-  testTypeId: string;
+  medicalDepartmentId: string;
   categoryIds: string[];
   normalRangeMin: string;
   normalRangeMax: string;

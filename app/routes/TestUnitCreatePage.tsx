@@ -27,7 +27,6 @@ export default function TestUnitCreate() {
 
   const onSubmit = async (data: TestUnitFormValues) => {
     try {
-      console.log(data);
       await addTestUnit(data);
       console.log("Toasting");
       reset();
