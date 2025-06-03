@@ -9,6 +9,7 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -24,6 +25,13 @@ export const links: Route.LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false, // Disable automatic refetching when window is refocused
+      },
+    },
+  });
   return (
     <html lang="en">
       <head>
@@ -32,8 +40,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
-        {children}
+      <body className="bg-primary">
+        <QueryClientProvider client={queryClient}>
+          {children}
+        </QueryClientProvider>
         <ScrollRestoration />
         <Scripts />
       </body>
