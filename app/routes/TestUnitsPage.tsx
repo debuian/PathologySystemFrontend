@@ -17,7 +17,10 @@ import {
   TableBody,
 } from "~/components/ui/table";
 import TestUnitEdit from "~/features/Test/TestUnits/TestUnitEdit";
-import { useTestUnitsData, type TestUnit } from "~/hooks/api/useUnitsData";
+import {
+  useTestUnitsData,
+  type TestUnit,
+} from "~/features/Test/TestUnits/hooks/api/useUnitsData";
 import TestUnitDeleteModal from "~/features/Test/TestUnits/TestUnitDeleteModal";
 
 export default function TestUnitsPage() {

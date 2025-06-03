@@ -7,10 +7,10 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { useAddTestTypeMutation } from "~/hooks/api/addTestTypeMutation";
 import useTestTypeForm, {
   type TestTypeFormValues,
-} from "~/hooks/useTestTypeForm";
+} from "~/features/Test/TestTypes/hooks/useTestTypeForm";
+import { useAddTestTypeMutation } from "~/features/Test/TestTypes/hooks/api/addTestTypeMutation";
 
 export default function TestTypeCreatePage() {
   const {

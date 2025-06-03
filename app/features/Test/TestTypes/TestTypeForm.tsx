@@ -6,15 +6,7 @@ import type {
   UseFormSetValue,
   UseFormWatch,
 } from "react-hook-form";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "../../../components/ui/card";
-import type { TestTypeFormValues } from "~/hooks/useTestTypeForm";
+import type { TestTypeFormValues } from "~/features/Test/TestTypes/hooks/useTestTypeForm";
 
 interface TestUnitFormProps {
   register: UseFormRegister<TestTypeFormValues>;

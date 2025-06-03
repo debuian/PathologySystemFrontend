@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
+
 export interface TestTypeFormValues {
-  name: "";
+  name: string;
 }
 const useTestTypeForm = (initialData?: TestTypeFormValues) => {
   const {

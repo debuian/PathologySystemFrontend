@@ -22,8 +22,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
-import { useTestTypesData } from "~/hooks/api/useTestTypesData";
-import { useTestUnitsData } from "~/hooks/api/useUnitsData";
+import { useTestUnitsData } from "~/features/Test/TestUnits/hooks/api/useUnitsData";
 import { cn } from "~/lib/utlis";
 import type { TestFormValues } from "~/constants/types/TestFormValues";
 import { useTestCategoriesData } from "~/hooks/api/useTestCategoriesData";
@@ -36,6 +35,7 @@ import {
   type UseFormSetValue,
   type UseFormWatch,
 } from "react-hook-form";
+import { useTestTypesData } from "./TestTypes/hooks/api/useTestTypesData";
 
 interface TestFormProps {
   register: UseFormRegister<TestFormValues>;
@@ -206,7 +206,9 @@ export const TestForm = ({
       </div>
 
       <div className="space-y-2">
-        <Label>Categories (Select multiple)</Label>
+        <label className="block text-gray-700 text-sm font-bold mb-2">
+          Categories (Select multiple)
+        </label>
         <Popover
           open={openCategoriesPopover}
           onOpenChange={setOpenCategoriesPopover}
