@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
-import { TestForm } from "~/features/Test/TestForm";
-import { useAddTestMutation } from "~/hooks/api/addTestMutation";
-import { useTestForm } from "~/hooks/useTestForm";
+import { TestForm } from "~/features/Test/components/TestForm";
+import { useAddTestMutation } from "~/features/Test/hooks/api/addTestMutation";
+import { useTestForm } from "~/features/Test/hooks/useTestForm";
 import type { TestFormValues } from "~/constants/types/TestFormValues";
 import {
   Card,

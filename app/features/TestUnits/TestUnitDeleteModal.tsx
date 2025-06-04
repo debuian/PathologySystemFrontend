@@ -3,7 +3,7 @@ import {
   DialogDescription,
   DialogTitle,
 } from "~/components/ui/dialog";
-import useDeletTestUnitMutation from "~/features/Test/TestUnits/hooks/api/useDeletTestUnitMutation";
+import useDeletTestUnitMutation from "./hooks/api/useDeletTestUnitMutation";
 interface TestUnitDeleteModalProps {
   name: string;
   id: string;

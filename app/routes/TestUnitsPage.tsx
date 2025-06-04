@@ -16,17 +16,16 @@ import {
   TableCell,
   TableBody,
 } from "~/components/ui/table";
-import TestUnitEdit from "~/features/Test/TestUnits/TestUnitEdit";
+import TestUnitEdit from "~/features/TestUnits/TestUnitEdit";
 import {
   useTestUnitsData,
   type TestUnit,
-} from "~/features/Test/TestUnits/hooks/api/useUnitsData";
-import TestUnitDeleteModal from "~/features/Test/TestUnits/TestUnitDeleteModal";
+} from "~/features/TestUnits/hooks/api/useUnitsData";
+import TestUnitDeleteModal from "~/features/TestUnits/TestUnitDeleteModal";
 
 export default function TestUnitsPage() {
   const { data } = useTestUnitsData();
   const [isOpen, setIsOpen] = useState(false);
-  console.log("first");
   const [selectedUnit, setSelectedUnit] = useState<TestUnit | null>(null);
   const [action, setAction] = useState<"update" | "delete" | null>(null);
   return (
@@ -66,7 +65,7 @@ export default function TestUnitsPage() {
             className="btn btn-primary flex items-center border px-4 py-2 rounded-md hover:bg-black hover:text-white"
           >
             <FilePlus className="h-4 w-4 mr-2" />
-            Create Test Unit
+            Create
           </Link>
         </CardHeader>
         <CardContent>

@@ -12,12 +12,12 @@ import {
   TableCell,
   TableBody,
 } from "~/components/ui/table";
-import DeleteMDepartmentModal from "~/features/Test/TestTypes/DeleteMDepartmentModal";
-import EditMDepartmentModal from "~/features/Test/TestTypes/EditMDepartmentModal";
+import DeleteMDepartmentModal from "~/features/TestTypes/DeleteMDepartmentModal";
+import EditMDepartmentModal from "~/features/TestTypes/EditMDepartmentModal";
 import {
   useTestTypesData,
   type TestType,
-} from "~/features/Test/TestTypes/hooks/api/useTestTypesData";
+} from "~/features/TestTypes/hooks/api/useTestTypesData";
 export default function TestTypePage() {
   const { data } = useTestTypesData();
   const [isOpen, setIsOpen] = useState(false);

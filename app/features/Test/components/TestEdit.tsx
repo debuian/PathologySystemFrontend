@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router";
-import { TestForm } from "~/features/Test/TestForm";
+import { TestForm } from "~/features/Test/components/TestForm";
 import type { TestFormValues } from "~/constants/types/TestFormValues";
-import { useUpdateTestMutation } from "~/hooks/api/updateTestMutation";
-import { useTestForm } from "~/hooks/useTestForm";
+import { useUpdateTestMutation } from "~/features/Test/hooks/api/updateTestMutation";
+import { useTestForm } from "~/features/Test/hooks/useTestForm";
 
 interface TestEditProps {
   initialData: TestFormValues;

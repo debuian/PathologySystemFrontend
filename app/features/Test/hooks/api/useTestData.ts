@@ -2,7 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import type { TestUnit } from "../../features/Test/TestUnits/hooks/api/useUnitsData";
-import type { TestCategory } from "../../features/Test/TestCategories/hooks/api/useTestCategoriesData";
+import type { TestCategory } from "../../../TestCategories/hooks/api/useTestCategoriesData";
 import type { TestType } from "./useTestTypesData";
 import axiosInstance from "~/lib/axiosInstance";
 

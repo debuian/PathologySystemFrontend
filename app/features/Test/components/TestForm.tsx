@@ -22,10 +22,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "~/components/ui/select";
-import { useTestUnitsData } from "~/features/Test/TestUnits/hooks/api/useUnitsData";
 import { cn } from "~/lib/utlis";
 import type { TestFormValues } from "~/constants/types/TestFormValues";
-import { useTestCategoriesData } from "~/features/Test/TestCategories/hooks/api/useTestCategoriesData";
+import { useTestCategoriesData } from "~/features/TestCategories/hooks/api/useTestCategoriesData";
 import {
   Controller,
   type Control,
@@ -35,7 +34,8 @@ import {
   type UseFormSetValue,
   type UseFormWatch,
 } from "react-hook-form";
-import { useTestTypesData } from "./TestTypes/hooks/api/useTestTypesData";
+import { useTestTypesData } from "../../TestTypes/hooks/api/useTestTypesData";
+import { useTestUnitsData } from "../../TestUnits/hooks/api/useUnitsData";
 
 interface TestFormProps {
   register: UseFormRegister<TestFormValues>;
@@ -83,7 +83,6 @@ export const TestForm = ({
       .join(", ");
   };
   const formSubmit = async (data: TestFormValues) => {
-    console.log(data);
     try {
       await onSubmit(data);
     } catch (error) {}

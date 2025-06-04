@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import TestTypeForm from "~/features/Test/TestTypes/TestTypeForm";
+import TestTypeForm from "~/features/TestTypes/TestTypeForm";
 import {
   Card,
   CardContent,
@@ -9,8 +9,8 @@ import {
 } from "~/components/ui/card";
 import useTestTypeForm, {
   type TestTypeFormValues,
-} from "~/features/Test/TestTypes/hooks/useTestTypeForm";
-import { useAddTestTypeMutation } from "~/features/Test/TestTypes/hooks/api/addTestTypeMutation";
+} from "~/features/TestTypes/hooks/useTestTypeForm";
+import { useAddTestTypeMutation } from "~/features/TestTypes/hooks/api/addTestTypeMutation";
 
 export default function TestTypeCreatePage() {
   const {
@@ -28,7 +28,6 @@ export default function TestTypeCreatePage() {
 
   const onSubmit = async (data: TestTypeFormValues) => {
     try {
-      console.log(data);
       await addTestType(data);
       console.log("Toasting");
       reset();

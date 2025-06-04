@@ -10,8 +10,6 @@ export const useAddTestCategoryMutation = () => {
 
   return useMutation({
     mutationFn: async (formData: TestCategoryFormValues) => {
-      console.log(formData);
-
       const response = await axiosInstance.post("/tests/categories", {
         ...formData,
       });

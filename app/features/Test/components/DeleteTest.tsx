@@ -1,4 +1,4 @@
-import { useDeleteTestMutation } from "~/hooks/api/deleteTestMutation";
+import { useDeleteTestMutation } from "~/features/Test/hooks/api/deleteTestMutation";
 
 interface DeleteTestProps {
   name: string;

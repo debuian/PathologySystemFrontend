@@ -16,15 +16,15 @@ import {
   TableRow,
   TableCell,
 } from "~/components/ui/table";
-import { useTestsData } from "~/hooks/api/useTestData";
+import { useTestsData } from "~/features/Test/hooks/api/useTestData";
 import type { TestFormValues } from "~/constants/types/TestFormValues";
 import {
   DialogContent,
   DialogTitle,
   DialogDescription,
 } from "~/components/ui/dialog";
-import TestEdit from "../features/Test/TestEdit";
-import DeleteTest from "~/features/Test/DeleteTest";
+import TestEdit from "../features/Test/components/TestEdit";
+import DeleteTest from "~/features/Test/components/DeleteTest";
 import Pagination from "~/components/Pagination";
 import Modal from "~/components/Modal";
 
@@ -48,7 +48,6 @@ export default function Test() {
   };
 
   const { data } = useTestsData(currentPage, itemsPerPage);
-  console.log(data);
   return (
     <>
       <Modal open={isOpen} setOpen={setIsOpen}>
@@ -89,7 +88,7 @@ export default function Test() {
             className="btn btn-primary flex items-center border px-4 py-2 rounded-md hover:bg-black hover:text-white"
           >
             <FilePlus className="h-4 w-4 mr-2" />
-            Create Report
+            Create
           </Link>
         </CardHeader>
 

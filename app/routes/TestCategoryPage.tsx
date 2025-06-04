@@ -1,7 +1,7 @@
 import {
   useTestCategoriesData,
   type TestCategory,
-} from "~/features/Test/TestCategories/hooks/api/useTestCategoriesData";
+} from "~/features/TestCategories/hooks/api/useTestCategoriesData";
 import { Edit, FilePlus, Trash2 } from "lucide-react";
 import { Link } from "react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
@@ -15,8 +15,8 @@ import {
 } from "~/components/ui/table";
 import { useState } from "react";
 import Modal from "~/components/Modal";
-import UpdateTestCategoryModal from "~/features/Test/TestCategories/components/UpdateTestCategoryModal";
-import DeleteTestCategoryModal from "~/features/Test/TestCategories/components/DeleteTestCategoryModal";
+import UpdateTestCategoryModal from "~/features/TestCategories/components/UpdateTestCategoryModal";
+import DeleteTestCategoryModal from "~/features/TestCategories/components/DeleteTestCategoryModal";
 
 export default function TestCategoryPage() {
   const { data } = useTestCategoriesData();
@@ -53,7 +53,7 @@ export default function TestCategoryPage() {
             className="btn btn-primary flex items-center border px-4 py-2 rounded-md hover:bg-black hover:text-white"
           >
             <FilePlus className="h-4 w-4 mr-2" />
-            Create Test Category
+            Create
           </Link>
         </CardHeader>
         <CardContent>

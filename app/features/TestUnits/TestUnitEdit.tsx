@@ -1,8 +1,8 @@
 import type { TestUnitFormValues } from "~/constants/types/TestUnitFormValues";
-import { useTestUnitForm } from "~/features/Test/TestUnits/hooks/useTestUnitForm";
 import TestUnitForm from "./TestUnitForm";
 import { useNavigate } from "react-router";
-import useTestUpdateMutation from "~/features/Test/TestUnits/hooks/api/useTestUnitUpdateMutation";
+import { useTestUnitForm } from "./hooks/useTestUnitForm";
+import useTestUpdateMutation from "./hooks/api/useTestUnitUpdateMutation";
 
 interface TestUnitEditProps {
   initialData: TestUnitFormValues;
