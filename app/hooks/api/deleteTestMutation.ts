@@ -12,7 +12,7 @@ export const useDeleteTestMutation = () => {
       return response.data;
     },
     onError: (error) => {
-      console.error("Error creating test:", error);
+      Promise.reject(error);
     },
     onSuccess: () => {
       // Alternative: More targeted invalidation

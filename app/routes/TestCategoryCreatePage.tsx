@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import TestCategoryForm from "~/features/Test/TestCategories/TestCategoryForm";
+import TestCategoryForm from "~/features/Test/TestCategories/components/TestCategoryForm";
 import {
   Card,
   CardContent,
@@ -7,10 +7,10 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import { useAddTestCategoryMutation } from "~/hooks/api/addTestCategoryMutation";
+import { useAddTestCategoryMutation } from "~/features/Test/TestCategories/hooks/api/addTestCategoryMutation";
 import useTestCategoryForm, {
   type TestCategoryFormValues,
-} from "~/hooks/useTestCategoryForm";
+} from "~/features/Test/TestCategories/hooks/useTestCategoryForm";
 
 export default function TestCategoryCreatePage() {
   const {

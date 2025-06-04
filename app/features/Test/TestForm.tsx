@@ -25,7 +25,7 @@ import {
 import { useTestUnitsData } from "~/features/Test/TestUnits/hooks/api/useUnitsData";
 import { cn } from "~/lib/utlis";
 import type { TestFormValues } from "~/constants/types/TestFormValues";
-import { useTestCategoriesData } from "~/hooks/api/useTestCategoriesData";
+import { useTestCategoriesData } from "~/features/Test/TestCategories/hooks/api/useTestCategoriesData";
 import {
   Controller,
   type Control,

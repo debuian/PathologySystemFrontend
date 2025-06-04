@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 export interface TestCategoryFormValues {
-  name: "";
+  name: string;
 }
 const useTestCategoryForm = (initialData?: TestCategoryFormValues) => {
   const {
@@ -10,12 +10,14 @@ const useTestCategoryForm = (initialData?: TestCategoryFormValues) => {
     setValue,
     watch,
     reset,
+    getValues,
     formState: { errors, isSubmitting },
   } = useForm<TestCategoryFormValues>({
     defaultValues: initialData || {
       name: "",
     },
   });
+  console.log("name value", getValues("name"));
 
   return {
     register,

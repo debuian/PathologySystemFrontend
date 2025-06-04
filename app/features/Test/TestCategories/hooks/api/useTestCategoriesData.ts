@@ -1,6 +1,5 @@
 // src/hooks/useUnitsData.ts
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import type { BaseApiResposne } from "~/global/api.response";
 import axiosInstance from "~/lib/axiosInstance";
 

@@ -31,8 +31,8 @@ const EditMDepartmentModal = ({ data, ModalCloseFn }: Props) => {
   const { mutateAsync: UpdateDepartment, isPending } = useUpdateDepartment(id);
   const onSubmit = async (formData: TestTypeFormValues) => {
     try {
+      await UpdateDepartment(formData);
       console.log("Toasting");
-      UpdateDepartment(formData);
       reset();
       ModalCloseFn();
       navigate("/medical_department");
