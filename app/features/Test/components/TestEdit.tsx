@@ -20,6 +20,7 @@ const TestEdit = ({ initialData, dataId, ModalCLoseFn }: TestEditProps) => {
     watch,
     reset,
     formState: { errors, isSubmitting },
+    referenceRanges: { fields, append, remove },
   } = useTestForm(initialData);
 
   const { mutateAsync: updateTest, isPending: isAddTestPending } =
@@ -50,6 +51,7 @@ const TestEdit = ({ initialData, dataId, ModalCLoseFn }: TestEditProps) => {
       isSubmitting={isSubmitting}
       onSubmit={onSubmit}
       submitButtonText="Edit Test"
+      referenceRanges={{ fields, append, remove }}
     />
   );
 };

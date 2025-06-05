@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import type { TestFormValues } from "~/constants/types/TestFormValues";
 
 export const useTestForm = (initialData?: TestFormValues) => {
@@ -19,9 +19,25 @@ export const useTestForm = (initialData?: TestFormValues) => {
       categoryIds: [],
       normalRangeMin: "",
       normalRangeMax: "",
+      referenceRanges: [
+        {
+          age_min_years: "",
+          age_max_years: "",
+          gender: "male",
+          normal_min: "",
+          normal_max: "",
+          critical_min: "",
+          critical_max: "",
+          notes: "",
+        },
+      ],
     },
   });
 
+  const { fields, append, remove } = useFieldArray({
+    name: "referenceRanges",
+    control,
+  });
   return {
     register,
     handleSubmit,
@@ -30,5 +46,10 @@ export const useTestForm = (initialData?: TestFormValues) => {
     watch,
     reset,
     formState: { errors, isSubmitting },
+    referenceRanges: {
+      fields,
+      append,
+      remove,
+    },
   };
 };

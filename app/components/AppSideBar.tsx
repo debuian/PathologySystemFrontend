@@ -1,7 +1,14 @@
-import { ClipboardMinus, House, TestTubeDiagonal } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  ClipboardMinus,
+  House,
+  TestTubeDiagonal,
+} from "lucide-react";
 import { Link, useLocation } from "react-router";
 import { cn } from "~/lib/utlis";
 import UserAvatar from "./ui/UserAvatar";
+import { useState } from "react";
 
 const navItems = [
   {
@@ -36,21 +43,31 @@ const navItems = [
   },
 ];
 export default function AppSideBar() {
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const location = useLocation();
-
   return (
     <aside
       className={cn(
-        "min-h-lvh bg-white shadow-lg w-64 flex-shrink-0 flex flex-col h-full border-r border-neutral-200 transition-all duration-300 ease-in-out "
+        "min-h-lvh  w-64 flex-shrink-0 flex flex-col h-full transition-all duration-300 ease-in-out z-50",
+        isCollapsed ? "w-16" : "w-64"
       )}
     >
       <div className="flex items-center justify-between py-4 border-b border-neutral-200">
-        <div className="w-full flex items-center justify-center">
-          <p className="text-lg font-semibold text-primary-700">
-            Pathology Report
-          </p>
-        </div>
+        {!isCollapsed && (
+          <div className="w-full flex items-center justify-center">
+            <p className="text-lg font-semibold text-primary-700">
+              Pathology Report
+            </p>
+          </div>
+        )}
+        <button
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          className="p-2 rounded-lg hover:bg-black/5 transition-colors mx-auto"
+        >
+          {isCollapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
+        </button>
       </div>
+
       <nav className="flex-1 overflow-y-auto py-4 px-3">
         <div className="space-y-1">
           {navItems.map((item) => (
@@ -60,19 +77,21 @@ export default function AppSideBar() {
               className={cn(
                 "flex items-center px-3 py-2 gap-2 rounded-md",
                 location.pathname === item.path
-                  ? "bg-primary-50 text-primary-700"
+                  ? "text-primary-700 bg-primary border-r-4 border-secondary"
                   : "text-neutral-700 hover:bg-neutral-50 hover:text-primary-600"
               )}
             >
               {item.icon}
-              {item.label}
+              {!isCollapsed && <span>{item.label}</span>}
             </Link>
           ))}
         </div>
       </nav>
-      <div className="w-full p-4">
-        <UserAvatar />
-      </div>
+      {!isCollapsed ? (
+        <div className="w-full p-4">
+          <UserAvatar />
+        </div>
+      ) : null}
     </aside>
   );
 }

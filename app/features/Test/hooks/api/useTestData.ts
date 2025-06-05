@@ -1,17 +1,16 @@
 // src/hooks/api/useTestData.ts
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-import type { TestUnit } from "../../features/Test/TestUnits/hooks/api/useUnitsData";
 import type { TestCategory } from "../../../TestCategories/hooks/api/useTestCategoriesData";
-import type { TestType } from "./useTestTypesData";
 import axiosInstance from "~/lib/axiosInstance";
+import type { TestUnit } from "~/features/TestUnits/hooks/api/useUnitsData";
+import type { TestType } from "~/features/TestTypes/hooks/api/useTestTypesData";
 
 interface CategoryMapping {
   id: number;
   category: TestCategory;
 }
 
-interface Test {
+export interface Test {
   id: number;
   name: string;
   price: number;
@@ -20,6 +19,17 @@ interface Test {
   categoryMappings: CategoryMapping[];
   normalRangeMin: number;
   normalRangeMax: number;
+  referenceRanges: {
+    id: number;
+    age_min_years: string;
+    age_max_years: string;
+    gender: string;
+    normal_min: string;
+    normal_max: string;
+    critical_min: string;
+    critical_max: string;
+    notes: string;
+  }[];
 }
 
 interface TestResponse {
@@ -52,8 +62,6 @@ export const testsQueryKeys = {
 };
 
 export function useTestsData(page: number = 1, limit: number = 10) {
-  console.log(page, limit);
-
   return useQuery({
     queryKey: testsQueryKeys.list({ page, limit }),
     queryFn: () => fetchTests(page, limit),

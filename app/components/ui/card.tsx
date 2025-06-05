@@ -9,7 +9,7 @@ const Card: React.FC<ComponentPropsWithoutRef<"div">> = ({
   return (
     <div
       className={cn(
-        "rounded-lg bg-card text-card-foreground shadow-sm",
+        "rounded-lg bg-white text-card-foreground shadow-sm",
         className
       )}
       {...props}

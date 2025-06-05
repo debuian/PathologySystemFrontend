@@ -20,6 +20,7 @@ export default function TestCreatePage() {
     watch,
     reset,
     formState: { errors, isSubmitting },
+    referenceRanges: { fields, append, remove },
   } = useTestForm();
 
   const navigate = useNavigate();
@@ -27,6 +28,7 @@ export default function TestCreatePage() {
     useAddTestMutation();
 
   const onSubmit = async (formData: TestFormValues) => {
+    console.log(formData);
     try {
       await addTest(formData);
       console.log("Toasting");
@@ -55,6 +57,7 @@ export default function TestCreatePage() {
           isSubmitting={isSubmitting}
           onSubmit={onSubmit}
           submitButtonText="Create Test"
+          referenceRanges={{ fields, append, remove }}
         />
       </CardContent>
     </Card>

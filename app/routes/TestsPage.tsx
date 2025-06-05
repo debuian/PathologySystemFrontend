@@ -1,4 +1,4 @@
-import { Edit, FilePlus, Trash2 } from "lucide-react";
+import { FilePlus } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
 import {
@@ -27,10 +27,11 @@ import TestEdit from "../features/Test/components/TestEdit";
 import DeleteTest from "~/features/Test/components/DeleteTest";
 import Pagination from "~/components/Pagination";
 import Modal from "~/components/Modal";
+import TestCard from "~/features/Test/components/TestCard";
 
 export default function Test() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(6);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTest, setSelectedTest] = useState<TestFormValues | null>(null);
   const [selectedTestID, setSelectedTestId] = useState<string | null>(null);
@@ -46,13 +47,12 @@ export default function Test() {
     setItemsPerPage(value);
     setCurrentPage(1);
   };
-
   const { data } = useTestsData(currentPage, itemsPerPage);
   return (
     <>
       <Modal open={isOpen} setOpen={setIsOpen}>
         {selectedAction === "UpdateTest" ? (
-          <DialogContent>
+          <DialogContent className=" overflow-y-auto  max-h-[80vh]">
             <DialogTitle>Edit</DialogTitle>
             <DialogDescription>Edit the Test Details</DialogDescription>
             {selectedTest && selectedTestID && (
@@ -82,7 +82,7 @@ export default function Test() {
 
       <Card>
         <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <CardTitle>Tests</CardTitle>
+          <CardTitle>Test Management</CardTitle>
           <Link
             to="/tests/create" // Absolute path
             className="btn btn-primary flex items-center border px-4 py-2 rounded-md hover:bg-black hover:text-white"
@@ -92,8 +92,8 @@ export default function Test() {
           </Link>
         </CardHeader>
 
-        <CardContent className="min-h-[calc(100vh-300px)] ">
-          <Table>
+        <CardContent className="min-h-[calc(100vh-300px)] space-y-6">
+          {/* <Table>
             <TableHeader>
               <TableRow className="hover:bg-muted/5">
                 <TableHead className="font-medium">Name</TableHead>
@@ -209,7 +209,40 @@ export default function Test() {
                 </TableRow>
               )}
             </TableBody>
-          </Table>
+          </Table> */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            {data?.data.map((test) => {
+              const formData: TestFormValues = {
+                name: test.name,
+                price: String(test?.price),
+                normalRangeMax: String(test.normalRangeMax),
+                normalRangeMin: String(test.normalRangeMin),
+                medicalDepartmentId: test.medicalDepartment?.id!,
+                testUnitId: test?.testUnit?.id!,
+                categoryIds: test?.categoryMappings?.map(
+                  (category) => category.category.id
+                ),
+                referenceRanges: test.referenceRanges,
+              };
+              return (
+                <TestCard
+                  test={test}
+                  onEdit={() => {
+                    setIsOpen(true);
+                    setSelectedTestId(String(test.id));
+                    setSelectedTest(formData);
+                    setSelectedAction("UpdateTest");
+                  }}
+                  onDelete={() => {
+                    setIsOpen(true);
+                    setSelectedTestId(String(test.id));
+                    setSelectedTest(formData);
+                    setSelectedAction("Delete");
+                  }}
+                />
+              );
+            })}
+          </div>
         </CardContent>
         {data?.meta && (
           <CardFooter className="justify-center">

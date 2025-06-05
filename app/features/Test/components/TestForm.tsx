@@ -1,4 +1,3 @@
-import { Label } from "~/components/ui/label";
 import {
   Command,
   CommandInput,
@@ -28,7 +27,10 @@ import { useTestCategoriesData } from "~/features/TestCategories/hooks/api/useTe
 import {
   Controller,
   type Control,
+  type FieldArrayWithId,
   type FieldErrors,
+  type UseFieldArrayAppend,
+  type UseFieldArrayRemove,
   type UseFormHandleSubmit,
   type UseFormRegister,
   type UseFormSetValue,
@@ -36,6 +38,8 @@ import {
 } from "react-hook-form";
 import { useTestTypesData } from "../../TestTypes/hooks/api/useTestTypesData";
 import { useTestUnitsData } from "../../TestUnits/hooks/api/useUnitsData";
+import ReferenceRangesForm from "./ReferenceRangesForm";
+import { Button } from "~/components/ui/button";
 
 interface TestFormProps {
   register: UseFormRegister<TestFormValues>;
@@ -48,6 +52,12 @@ interface TestFormProps {
   isSubmitting: boolean;
   onSubmit: (data: TestFormValues) => Promise<void>;
   submitButtonText?: string;
+
+  referenceRanges: {
+    fields: FieldArrayWithId<TestFormValues, "referenceRanges", "id">[];
+    append: UseFieldArrayAppend<TestFormValues, "referenceRanges">;
+    remove: UseFieldArrayRemove;
+  };
 }
 
 export const TestForm = ({
@@ -60,6 +70,7 @@ export const TestForm = ({
   isSubmitting,
   onSubmit,
   submitButtonText = "Create Test",
+  referenceRanges: { fields, append, remove },
 }: TestFormProps) => {
   const { data: testUnits } = useTestUnitsData();
   const { data: testTypes } = useTestTypesData();
@@ -88,7 +99,7 @@ export const TestForm = ({
     } catch (error) {}
   };
   return (
-    <form className="flex flex-col  gap-4 " onSubmit={handleSubmit(formSubmit)}>
+    <form className="flex flex-col gap-4 " onSubmit={handleSubmit(formSubmit)}>
       {/* Text Input Example */}
 
       <div className="space-y-2">
@@ -285,6 +296,36 @@ export const TestForm = ({
           />
         </div>
       </div>
+
+      {fields.map((field, index) => {
+        return (
+          <ReferenceRangesForm
+            index={index}
+            errors={errors}
+            register={register}
+            onRemove={remove}
+          />
+        );
+      })}
+      <Button
+        variant={"outline"}
+        className="w-min p-2"
+        type="button"
+        onClick={() =>
+          append({
+            age_min_years: "",
+            age_max_years: "",
+            gender: "male",
+            normal_min: "",
+            normal_max: "",
+            critical_min: "",
+            critical_max: "",
+            notes: "",
+          })
+        }
+      >
+        Add Range
+      </Button>
       <button
         type="submit"
         disabled={isSubmitting}
