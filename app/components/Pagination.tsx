@@ -59,7 +59,7 @@ export default function Pagination({
   return (
     <div className="flex flex-col sm:flex-row items-center justify-between gap-4 w-full">
       <div className="flex items-center gap-2">
-        <span className="text-sm text-gray-600">Rows per page:</span>
+        <span className="text-sm text-gray-600">Data per page:</span>
         <select
           value={itemsPerPage}
           onChange={(e) => {

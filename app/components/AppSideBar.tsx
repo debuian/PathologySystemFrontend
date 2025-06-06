@@ -17,11 +17,6 @@ const navItems = [
     icon: <House size={16} strokeWidth={1.5} />,
   },
   {
-    path: "/reports",
-    label: "Reports",
-    icon: <ClipboardMinus size={16} strokeWidth={1.5} />,
-  },
-  {
     path: "/tests",
     label: "Tests",
     icon: <TestTubeDiagonal size={16} strokeWidth={1.5} />,
@@ -41,6 +36,11 @@ const navItems = [
     label: "Test Categories",
     icon: <TestTubeDiagonal size={16} strokeWidth={1.5} />,
   },
+  {
+    path: "/specimens",
+    label: "specimens",
+    icon: <TestTubeDiagonal size={16} strokeWidth={1.5} />,
+  },
 ];
 export default function AppSideBar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -48,7 +48,7 @@ export default function AppSideBar() {
   return (
     <aside
       className={cn(
-        "min-h-lvh  w-64 flex-shrink-0 flex flex-col h-full transition-all duration-300 ease-in-out z-50",
+        "min-h-lvh  w-64 flex-shrink-0 flex flex-col h-full transition-all duration-600 ease-in-out z-50",
         isCollapsed ? "w-16" : "w-64"
       )}
     >

@@ -17,8 +17,6 @@ export const useTestForm = (initialData?: TestFormValues) => {
       testUnitId: "",
       medicalDepartmentId: "",
       categoryIds: [],
-      normalRangeMin: "",
-      normalRangeMax: "",
       referenceRanges: [
         {
           age_min_years: "",

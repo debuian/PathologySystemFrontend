@@ -3,9 +3,8 @@ export interface TestFormValues {
   price: string;
   testUnitId: string;
   medicalDepartmentId: string;
+  specimenId: string;
   categoryIds: string[];
-  normalRangeMin: string;
-  normalRangeMax: string;
   referenceRanges: {
     age_min_years: string;
     age_max_years: string;

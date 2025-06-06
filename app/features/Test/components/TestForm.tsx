@@ -40,6 +40,7 @@ import { useTestTypesData } from "../../TestTypes/hooks/api/useTestTypesData";
 import { useTestUnitsData } from "../../TestUnits/hooks/api/useUnitsData";
 import ReferenceRangesForm from "./ReferenceRangesForm";
 import { Button } from "~/components/ui/button";
+import { useSpecimensData } from "~/features/Specimen/hooks/api/useSpecimenData";
 
 interface TestFormProps {
   register: UseFormRegister<TestFormValues>;
@@ -47,12 +48,10 @@ interface TestFormProps {
   control: Control<TestFormValues, any, TestFormValues>;
   setValue: UseFormSetValue<TestFormValues>;
   watch: UseFormWatch<TestFormValues>;
-
   errors: FieldErrors<TestFormValues>;
   isSubmitting: boolean;
   onSubmit: (data: TestFormValues) => Promise<void>;
   submitButtonText?: string;
-
   referenceRanges: {
     fields: FieldArrayWithId<TestFormValues, "referenceRanges", "id">[];
     append: UseFieldArrayAppend<TestFormValues, "referenceRanges">;
@@ -75,6 +74,7 @@ export const TestForm = ({
   const { data: testUnits } = useTestUnitsData();
   const { data: testTypes } = useTestTypesData();
   const { data: categories } = useTestCategoriesData();
+  const { data: specimenData } = useSpecimensData();
   const [openCategoriesPopover, setOpenCategoriesPopover] = useState(false);
   const categoryIds = watch("categoryIds");
 
@@ -214,7 +214,35 @@ export const TestForm = ({
           />
         </div>
       </div>
-
+      <div className="space-y-2">
+        <label htmlFor="specimenId">Department</label>
+        <Controller
+          name="specimenId"
+          control={control}
+          rules={{ required: "specimen is required" }}
+          render={({ field }) => (
+            <Select
+              value={field.value}
+              onValueChange={(value) => {
+                field.onChange(value);
+              }}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select a specimen">
+                  {testTypes?.find((type) => type.id === field.value)?.name}
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent>
+                {specimenData?.map((specimen) => (
+                  <SelectItem key={specimen.id} value={String(specimen.id)}>
+                    {specimen.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        />
+      </div>
       <div className="space-y-2">
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Categories (Select multiple)
@@ -269,32 +297,6 @@ export const TestForm = ({
             </Command>
           </PopoverContent>
         </Popover>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="space-y-2 flex flex-col">
-          <label htmlFor="normalRangeMin">Normal Range Min</label>
-          <input
-            id="normalRangeMin"
-            type="number"
-            step="0.1"
-            {...register("normalRangeMin")}
-            placeholder="4.0"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
-
-        <div className="space-y-2 flex flex-col">
-          <label htmlFor="normalRangeMax">Normal Range Max</label>
-          <input
-            id="normalRangeMax"
-            type="number"
-            step="0.1"
-            {...register("normalRangeMax")}
-            placeholder="11.0"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
       </div>
 
       {fields.map((field, index) => {

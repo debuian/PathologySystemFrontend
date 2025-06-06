@@ -31,7 +31,7 @@ import TestCard from "~/features/Test/components/TestCard";
 
 export default function Test() {
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const [itemsPerPage, setItemsPerPage] = useState(3);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedTest, setSelectedTest] = useState<TestFormValues | null>(null);
   const [selectedTestID, setSelectedTestId] = useState<string | null>(null);
@@ -130,12 +130,6 @@ export default function Test() {
                         ? `${test.medicalDepartment.name.slice(0, 25)}...`
                         : test?.medicalDepartment?.name}
                     </TableCell>
-                    <TableCell className="text-center">
-                      {test?.normalRangeMin}
-                    </TableCell>
-                    <TableCell className="text-center">
-                      {test?.normalRangeMax}
-                    </TableCell>
                     <TableCell>
                       <div className="flex flex-wrap gap-1">
                         {test.categoryMappings.slice(0, 3).map((category) => (
@@ -160,8 +154,7 @@ export default function Test() {
                             const formData: TestFormValues = {
                               name: test.name,
                               price: String(test?.price),
-                              normalRangeMax: String(test.normalRangeMax),
-                              normalRangeMin: String(test.normalRangeMin),
+                         
                               medicalDepartmentId: test.medicalDepartment?.id!,
                               testUnitId: test?.testUnit?.id!,
                               categoryIds: test?.categoryMappings?.map(
@@ -181,8 +174,7 @@ export default function Test() {
                             const formData: TestFormValues = {
                               name: test.name,
                               price: String(test?.price),
-                              normalRangeMax: String(test.normalRangeMax),
-                              normalRangeMin: String(test.normalRangeMin),
+                            
                               medicalDepartmentId: test.medicalDepartment?.id!,
                               testUnitId: test?.testUnit?.id!,
                               categoryIds: test?.categoryMappings?.map(
@@ -215,8 +207,6 @@ export default function Test() {
               const formData: TestFormValues = {
                 name: test.name,
                 price: String(test?.price),
-                normalRangeMax: String(test.normalRangeMax),
-                normalRangeMin: String(test.normalRangeMin),
                 medicalDepartmentId: test.medicalDepartment?.id!,
                 testUnitId: test?.testUnit?.id!,
                 categoryIds: test?.categoryMappings?.map(

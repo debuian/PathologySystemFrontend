@@ -4,6 +4,7 @@ import type { TestCategory } from "../../../TestCategories/hooks/api/useTestCate
 import axiosInstance from "~/lib/axiosInstance";
 import type { TestUnit } from "~/features/TestUnits/hooks/api/useUnitsData";
 import type { TestType } from "~/features/TestTypes/hooks/api/useTestTypesData";
+import type { SpecimenData } from "~/features/Specimen/hooks/api/useSpecimenData";
 
 interface CategoryMapping {
   id: number;
@@ -17,8 +18,7 @@ export interface Test {
   testUnit: TestUnit | null;
   medicalDepartment: TestType | null;
   categoryMappings: CategoryMapping[];
-  normalRangeMin: number;
-  normalRangeMax: number;
+  specimens: SpecimenData;
   referenceRanges: {
     id: number;
     age_min_years: string;

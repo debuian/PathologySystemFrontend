@@ -29,7 +29,7 @@ const getGenderBadgeColor = (gender: string) => {
 };
 const TestCard = ({ test, onDelete, onEdit }: testCardProps) => {
   return (
-    <Card>
+    <Card className="border">
       <CardHeader className="pb-3">
         <div className="flex justify-between items-start">
           <div>
@@ -48,13 +48,16 @@ const TestCard = ({ test, onDelete, onEdit }: testCardProps) => {
 
           <div>
             <p className="text-gray-600">Specimen</p>
-            <p className="font-medium">Whole Blood</p>
+            <p className="font-medium">{test?.specimens?.name}</p>
           </div>
         </div>
-        <div className="flex items-center gap-2 flex-wrap">
-          {test.categoryMappings?.map((category) => (
-            <Badge>{category.category.name}</Badge>
-          ))}
+        <div>
+          <p className="text-gray-600 text-sm">Categories</p>
+          <div className="flex items-center gap-2 flex-wrap">
+            {test.categoryMappings?.map((category) => (
+              <Badge>{category.category.name}</Badge>
+            ))}
+          </div>
         </div>
         <div className="flex items-center justify-between">
           <div className="flex items-center text-green-600">
@@ -66,54 +69,61 @@ const TestCard = ({ test, onDelete, onEdit }: testCardProps) => {
             <span className="text-sm">2-4 hours</span>
           </div>
         </div>
-        {test.referenceRanges && test.referenceRanges.length > 0 && (
-          <div className="space-y-2">
-            <p className="text-sm font-medium text-gray-700 flex items-center">
-              <TestTube size={14} className="mr-1" />
-              Reference Ranges ({test.referenceRanges.length})
-            </p>
-            <div className="max-h-32 overflow-y-auto space-y-2">
-              {test.referenceRanges.map((range) => (
-                <div key={range.id} className="bg-gray-50 p-2 rounded text-xs">
-                  <div className="flex items-center justify-between mb-1">
-                    <div className="flex items-center space-x-2">
-                      <span
-                        className={`px-2 py-1 rounded text-xs ${getGenderBadgeColor(
-                          range.gender
-                        )}`}
-                      >
-                        {range.gender === "any" ? "All" : range.gender}
-                      </span>
-                      <div className="flex items-center text-gray-600">
-                        <Calendar size={12} className="mr-1" />
-                        <span>
-                          {range.age_min_years}-{range.age_max_years}y
+        <div className="space-y-2">
+          <p className="text-sm font-medium text-gray-700 flex items-center">
+            <TestTube size={14} className="mr-1" />
+            Reference Ranges ({test.referenceRanges.length})
+          </p>
+          <div className="h-32 overflow-y-auto space-y-2">
+            {test.referenceRanges && test.referenceRanges.length > 0 && (
+              <>
+                {test.referenceRanges.map((range) => (
+                  <div
+                    key={range.id}
+                    className="bg-gray-50 p-2 rounded text-xs"
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      <div className="flex items-center space-x-2">
+                        <span
+                          className={`px-2 py-1 rounded text-xs ${getGenderBadgeColor(
+                            range.gender
+                          )}`}
+                        >
+                          {range.gender === "any" ? "All" : range.gender}
                         </span>
+                        <div className="flex items-center text-gray-600">
+                          <Calendar size={12} className="mr-1" />
+                          <span>
+                            {range.age_min_years}-{range.age_max_years}y
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-2 text-xs">
-                    <div>
-                      <span className="text-green-600 font-medium">
-                        Normal:
-                      </span>
-                      {range.normal_min}-{range.normal_max}
+                    <div className="grid grid-cols-2 gap-2 text-xs">
+                      <div>
+                        <span className="text-green-600 font-medium">
+                          Normal:
+                        </span>
+                        {range.normal_min}-{range.normal_max}
+                      </div>
+                      <div>
+                        <span className="text-red-600 font-medium">
+                          Critical:
+                        </span>
+                        {range.critical_min}-{range.critical_max}
+                      </div>
                     </div>
-                    <div>
-                      <span className="text-red-600 font-medium">
-                        Critical:
-                      </span>
-                      {range.critical_min}-{range.critical_max}
-                    </div>
+                    {range.notes && (
+                      <p className="text-gray-600 mt-1 text-xs">
+                        {range.notes}
+                      </p>
+                    )}
                   </div>
-                  {range.notes && (
-                    <p className="text-gray-600 mt-1 text-xs">{range.notes}</p>
-                  )}
-                </div>
-              ))}
-            </div>
+                ))}
+              </>
+            )}
           </div>
-        )}
+        </div>
 
         <div className="flex space-x-2">
           <Button
