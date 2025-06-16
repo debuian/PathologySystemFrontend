@@ -62,7 +62,7 @@ const SpecimenForm = ({
         )}
       </div>
 
-      <div className="space-y-2">
+      {/* <div className="space-y-2">
         <label
           className="block text-gray-700 text-sm font-bold mt-2 mb-2"
           htmlFor="storage"
@@ -79,7 +79,7 @@ const SpecimenForm = ({
         {errors.storage && (
           <p className="text-red-500 text-xs ">{errors.storage.message}</p>
         )}
-      </div>
+      </div> */}
       <Button
         type="submit"
         disabled={isSubmitting}

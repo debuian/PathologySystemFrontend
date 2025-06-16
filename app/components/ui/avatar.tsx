@@ -1,5 +1,4 @@
 import * as AvatarPrimitive from "@radix-ui/react-avatar";
-import type { C } from "node_modules/react-router/dist/development/route-data-C12CLHiN.mjs";
 import React, { type ComponentPropsWithoutRef } from "react";
 import { cn } from "~/lib/utlis";
 
