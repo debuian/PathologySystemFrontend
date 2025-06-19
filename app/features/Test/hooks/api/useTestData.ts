@@ -11,6 +11,15 @@ interface CategoryMapping {
   category: TestCategory;
 }
 
+interface specimenRequirement {
+  id: number;
+  specimen: SpecimenData;
+  container: {
+    id: number;
+    name: string;
+  };
+}
+
 export interface Test {
   id: number;
   name: string;
@@ -18,7 +27,7 @@ export interface Test {
   testUnit: TestUnit | null;
   medicalDepartment: TestType | null;
   categoryMappings: CategoryMapping[];
-  specimens: SpecimenData;
+  specimenRequirements: specimenRequirement[];
   referenceRanges: {
     id: number;
     age_min_years: string;

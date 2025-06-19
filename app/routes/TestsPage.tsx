@@ -213,6 +213,7 @@ export default function Test() {
                   (category) => category.category.id
                 ),
                 referenceRanges: test.referenceRanges,
+                specimenId: test.specimenRequirements?.[0]?.specimen?.id || "",
               };
               return (
                 <TestCard

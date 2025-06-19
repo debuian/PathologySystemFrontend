@@ -12,7 +12,7 @@ export interface TestUnit {
 
 // Function to fetch data
 const fetchTestUnits = async (): Promise<TestUnit[]> => {
-  const response = await axiosInstance.get("/tests/units");
+  const response = await axiosInstance.get("/test-units");
   return response.data;
 };
 export const TestUnitsQueryKey = ["test", "units"];

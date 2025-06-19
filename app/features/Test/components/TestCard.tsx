@@ -48,7 +48,11 @@ const TestCard = ({ test, onDelete, onEdit }: testCardProps) => {
 
           <div>
             <p className="text-gray-600">Specimen</p>
-            <p className="font-medium">{test?.specimens?.name}</p>
+            {test.specimenRequirements?.map((req) => (
+              <p key={req.id} className="font-medium">
+                {req.specimen.name}
+              </p>
+            ))}
           </div>
         </div>
         <div>

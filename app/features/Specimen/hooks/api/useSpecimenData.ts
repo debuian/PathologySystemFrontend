@@ -4,11 +4,10 @@ import axiosInstance from "~/lib/axiosInstance";
 export interface SpecimenData {
   id: string;
   name: string;
-  storage: string;
 }
 
 const fetchSpecimens = async () => {
-  const response = await axiosInstance.get<SpecimenData[]>("/specimens");
+  const response = await axiosInstance.get<SpecimenData[]>("/test-specimens");
   return response.data;
 };
 
@@ -18,6 +17,6 @@ export function useSpecimensData() {
   return useQuery({
     queryKey: SpecimensQueryKey,
     queryFn: fetchSpecimens,
-    staleTime: 5 * 60 * 1000, // Data considered fresh for 5 minutes
+    staleTime: 5 * 60 * 1000,
   });
 }

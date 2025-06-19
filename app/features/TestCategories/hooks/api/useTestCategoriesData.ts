@@ -13,7 +13,9 @@ export interface TestCategoriesResp extends BaseApiResposne {
 }
 // Function to fetch data
 const fetchTestCategories = async (): Promise<TestCategory[]> => {
-  const response = await axiosInstance.get("/tests/categories");
+  const response = await axiosInstance.get("/test-categories");
+  console.log("Fetched test categories:", response.data);
+
   return response.data;
 };
 
