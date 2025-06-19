@@ -22,5 +22,7 @@ export default [
     route("tests/categories/create", "routes/TestCategoryCreatePage.tsx"),
     route("/specimens", "routes/SpecimenPage.tsx"),
     route("/specimens/create", "routes/CreateSpecimenPage.tsx"),
+    route("containers", "routes/ContainersPage.tsx"),
+    route("containers/create", "routes/ContainerCreatePage.tsx"),
   ]),
 ] satisfies RouteConfig;

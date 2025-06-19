@@ -41,6 +41,11 @@ const navItems = [
     label: "specimens",
     icon: <TestTubeDiagonal size={16} strokeWidth={1.5} />,
   },
+  {
+    path: "/containers",
+    label: "containers",
+    icon: <TestTubeDiagonal size={16} strokeWidth={1.5} />,
+  },
 ];
 export default function AppSideBar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
