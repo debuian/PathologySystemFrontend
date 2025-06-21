@@ -6,7 +6,7 @@ import type {
   UseFormSetValue,
   UseFormWatch,
 } from "react-hook-form";
-import type { DepartmentFormValues } from "../hooks/useDepartmentForm";
+import type { DepartmentFormValues } from "types/form/DepartmentFormValues";
 
 interface TestUnitFormProps {
   register: UseFormRegister<DepartmentFormValues>;
