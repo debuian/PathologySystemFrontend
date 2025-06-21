@@ -1,8 +1,9 @@
-import type { TestUnitFormValues } from "~/constants/types/TestUnitFormValues";
+import type { TestUnitFormValues } from "types/form/TestUnitFormValues";
 import TestUnitForm from "./TestUnitForm";
 import { useNavigate } from "react-router";
-import { useTestUnitForm } from "./hooks/useTestUnitForm";
-import useTestUpdateMutation from "./hooks/api/useTestUnitUpdateMutation";
+import { useTestUnitForm } from "../hooks/useTestUnitForm";
+import useTestUpdateMutation from "../hooks/api/useTestUnitUpdateMutation";
+import toast from "react-hot-toast";
 
 interface TestUnitEditProps {
   initialData: TestUnitFormValues;
@@ -26,17 +27,18 @@ const TestUnitEdit = ({
 
   const navigate = useNavigate();
   const { mutateAsync: updateTestUnit, isPending: isAddTestPending } =
-    useTestUpdateMutation(dataId);
+    useTestUpdateMutation();
 
   const onSubmit = async (formData: TestUnitFormValues) => {
     try {
-      await updateTestUnit(formData);
-      console.log("Toasting");
+      await updateTestUnit({ data: formData, id: dataId });
+      toast.success("Test Unit updated successfully");
       reset();
       ModalCLoseFn();
       navigate("/tests/units");
       console.log("Redirecting");
     } catch (error) {
+      toast.error("Failed to update Test Unit");
       console.error("Failed to create test:", error);
     }
   };

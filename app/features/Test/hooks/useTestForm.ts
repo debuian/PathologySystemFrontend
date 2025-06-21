@@ -1,5 +1,5 @@
 import { useFieldArray, useForm } from "react-hook-form";
-import type { TestFormValues } from "~/constants/types/TestFormValues";
+import type { TestFormValues } from "types/form/TestFormValues";
 
 export const useTestForm = (initialData?: TestFormValues) => {
   const {
@@ -14,9 +14,15 @@ export const useTestForm = (initialData?: TestFormValues) => {
     defaultValues: initialData || {
       name: "",
       price: "",
-      testUnitId: "",
-      medicalDepartmentId: "",
+      testUnitId: 0,
+      medicalDepartmentId: 0,
       categoryIds: [],
+      specimenRequirements: [
+        {
+          specimenId: 0,
+          containerId: 0,
+        },
+      ],
       referenceRanges: [
         {
           age_min_years: "",
@@ -37,6 +43,14 @@ export const useTestForm = (initialData?: TestFormValues) => {
     control,
   });
 
+  const {
+    fields: specimenRequirementFields,
+    append: specimenRequirementAppend,
+    remove: specimenRequirementRemove,
+  } = useFieldArray({
+    name: "specimenRequirements",
+    control,
+  });
   return {
     register,
     handleSubmit,
@@ -49,6 +63,11 @@ export const useTestForm = (initialData?: TestFormValues) => {
       fields,
       append,
       remove,
+    },
+    specimenRequirements: {
+      specimenRequirementFields,
+      specimenRequirementAppend,
+      specimenRequirementRemove,
     },
   };
 };

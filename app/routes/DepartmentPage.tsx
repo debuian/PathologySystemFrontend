@@ -1,5 +1,4 @@
 import { Edit, FilePlus, Trash2 } from "lucide-react";
-import test from "node:test";
 import { useState } from "react";
 import { Link } from "react-router";
 import Modal from "~/components/Modal";
@@ -12,16 +11,15 @@ import {
   TableCell,
   TableBody,
 } from "~/components/ui/table";
-import DeleteMDepartmentModal from "~/features/TestTypes/DeleteMDepartmentModal";
-import EditMDepartmentModal from "~/features/TestTypes/EditMDepartmentModal";
-import {
-  useTestTypesData,
-  type TestType,
-} from "~/features/TestTypes/hooks/api/useTestTypesData";
-export default function TestTypePage() {
-  const { data } = useTestTypesData();
+import type { Department } from "~/constants/types/api/Department";
+import DeleteMDepartmentModal from "~/features/Department/components/DeleteMDepartmentModal";
+import EditMDepartmentModal from "~/features/Department/components/EditMDepartmentModal";
+import { useDepartmentsData } from "~/features/Department/hooks/api/useTestTypesData";
+
+export default function DepartmentPage() {
+  const { data } = useDepartmentsData();
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState<TestType | null>(null);
+  const [selected, setSelected] = useState<Department | null>(null);
   const [action, setAction] = useState<"update" | "delete" | null>(null);
 
   return (
@@ -46,7 +44,7 @@ export default function TestTypePage() {
         <CardHeader className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <CardTitle>Medical Department</CardTitle>
           <Link
-            to={{ pathname: "create" }}
+            to="/department/create" // Absolute path
             className="btn btn-primary flex items-center border px-4 py-2 rounded-md hover:bg-black hover:text-white"
           >
             <FilePlus className="h-4 w-4 mr-2" />

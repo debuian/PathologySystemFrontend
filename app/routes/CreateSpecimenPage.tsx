@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router";
-import useSpecimenForm, {
-  type SpecimenFormValues,
-} from "~/features/Specimen/hooks/useSpecimenForm";
+import useSpecimenForm from "~/features/Specimen/hooks/useSpecimenForm";
 import {
   Card,
   CardContent,
@@ -11,6 +9,7 @@ import {
 } from "~/components/ui/card";
 import SpecimenForm from "~/features/Specimen/components/SpecimenForm";
 import addSpecimenMutation from "~/features/Specimen/hooks/api/addSpecimenMutation";
+import type { SpecimenFormValues } from "types/form/SpecimenFormValues";
 
 export default function CreateSpecimenPage() {
   const {

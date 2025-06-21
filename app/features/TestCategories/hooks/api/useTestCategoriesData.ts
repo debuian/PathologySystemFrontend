@@ -1,21 +1,10 @@
 // src/hooks/useUnitsData.ts
 import { useQuery } from "@tanstack/react-query";
-import type { BaseApiResposne } from "~/global/api.response";
+import type { TestCategory } from "types/api/TestCategory";
 import axiosInstance from "~/lib/axiosInstance";
 
-export interface TestCategory {
-  id: string;
-  name: string;
-}
-
-export interface TestCategoriesResp extends BaseApiResposne {
-  data: TestCategory[];
-}
-// Function to fetch data
-const fetchTestCategories = async (): Promise<TestCategory[]> => {
-  const response = await axiosInstance.get("/test-categories");
-  console.log("Fetched test categories:", response.data);
-
+const fetchTestCategories = async () => {
+  const response = await axiosInstance.get<TestCategory[]>("/test-categories");
   return response.data;
 };
 

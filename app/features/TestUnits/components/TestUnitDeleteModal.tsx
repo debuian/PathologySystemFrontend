@@ -3,7 +3,8 @@ import {
   DialogDescription,
   DialogTitle,
 } from "~/components/ui/dialog";
-import useDeletTestUnitMutation from "./hooks/api/useDeletTestUnitMutation";
+import useDeletTestUnitMutation from "../hooks/api/useDeletTestUnitMutation";
+
 interface TestUnitDeleteModalProps {
   name: string;
   id: string;
@@ -15,6 +16,7 @@ const TestUnitDeleteModal = ({
   ModalCLoseFn,
 }: TestUnitDeleteModalProps) => {
   const { mutateAsync: deleteTestUnit } = useDeletTestUnitMutation();
+
   const deleteFn = () => {
     deleteTestUnit(id);
     ModalCLoseFn();
@@ -27,7 +29,10 @@ const TestUnitDeleteModal = ({
       <div className="flex flex-col gap-2">
         Test Unit Name : {name}
         <div className="mt-2 flex items-center justify-between">
-          <button className="w-fit bg-black/10 hover:bg-black/20 px-4 py-2 rounded-xl disabled:opacity-50">
+          <button
+            className="w-fit bg-black/10 hover:bg-black/20 px-4 py-2 rounded-xl disabled:opacity-50"
+            onClick={ModalCLoseFn}
+          >
             Cancel
           </button>
           <button

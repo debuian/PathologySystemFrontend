@@ -1,6 +1,6 @@
 import { Activity, AlertTriangle, Calendar, Trash2, User } from "lucide-react";
 import { type FieldErrors, type UseFormRegister } from "react-hook-form";
-import type { TestFormValues } from "~/constants/types/TestFormValues";
+import type { TestFormValues } from "types/form/TestFormValues";
 
 interface Props {
   register: UseFormRegister<TestFormValues>;

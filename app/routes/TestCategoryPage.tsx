@@ -1,7 +1,3 @@
-import {
-  useTestCategoriesData,
-  type TestCategory,
-} from "~/features/TestCategories/hooks/api/useTestCategoriesData";
 import { Edit, FilePlus, Trash2 } from "lucide-react";
 import { Link } from "react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
@@ -17,6 +13,8 @@ import { useState } from "react";
 import Modal from "~/components/Modal";
 import UpdateTestCategoryModal from "~/features/TestCategories/components/UpdateTestCategoryModal";
 import DeleteTestCategoryModal from "~/features/TestCategories/components/DeleteTestCategoryModal";
+import { useTestCategoriesData } from "~/features/TestCategories/hooks/api/useTestCategoriesData";
+import type { TestCategory } from "types/api/TestCategory";
 
 export default function TestCategoryPage() {
   const { data } = useTestCategoriesData();
@@ -30,7 +28,7 @@ export default function TestCategoryPage() {
           action === "Updated" ? (
             <UpdateTestCategoryModal
               key={selected.id}
-              id={selected.id}
+              id={String(selected.id)}
               data={(() => {
                 const { id, ...rest } = selected;
                 return rest;

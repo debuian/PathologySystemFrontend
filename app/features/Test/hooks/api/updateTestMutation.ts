@@ -1,6 +1,6 @@
 // ~/hooks/api/addTestMutation.ts
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { TestFormValues } from "~/constants/types/TestFormValues";
+import type { TestFormValues } from "types/form/TestFormValues";
 import axiosInstance from "~/lib/axiosInstance";
 import { testsQueryKeys } from "./useTestData";
 

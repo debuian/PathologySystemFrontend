@@ -6,8 +6,8 @@ import type {
   UseFormSetValue,
   UseFormWatch,
 } from "react-hook-form";
+import type { TestCategoryFormValues } from "types/form/TestCategoryFormValues";
 
-import type { TestCategoryFormValues } from "~/features/TestCategories/hooks/useTestCategoryForm";
 interface TestCategoryFormProps {
   register: UseFormRegister<TestCategoryFormValues>;
   handleSubmit: UseFormHandleSubmit<

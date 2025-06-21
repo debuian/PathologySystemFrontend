@@ -1,6 +1,7 @@
 import { Edit, FilePlus, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
+import type { Specimen } from "types/api/Specimen";
 import { Card, CardContent, CardHeader, CardTitle } from "~/components/ui/card";
 import {
   Table,
@@ -10,14 +11,11 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
-import {
-  useSpecimensData,
-  type SpecimenData,
-} from "~/features/Specimen/hooks/api/useSpecimenData";
+import { useSpecimensData } from "~/features/Specimen/hooks/api/useSpecimenData";
 
 export default function SpecimenPage() {
   const { data } = useSpecimensData();
-  const [selected, setSelected] = useState<SpecimenData | null>(null);
+  const [selected, setSelected] = useState<Specimen | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [action, setAction] = useState<"Updated" | "Delete" | null>(null);
 
@@ -39,7 +37,6 @@ export default function SpecimenPage() {
             <TableRow className="font-medium">
               <TableHead>Id</TableHead>
               <TableHead>Name</TableHead>
-              <TableHead>Storage</TableHead>
               <TableHead className="text-right ">Actions</TableHead>
             </TableRow>
           </TableHeader>
@@ -49,7 +46,6 @@ export default function SpecimenPage() {
                   <TableRow key={specimen.id} className="font-medium">
                     <TableCell>{specimen.id}</TableCell>
                     <TableCell>{specimen.name}</TableCell>
-                    <TableCell>{specimen.storage}</TableCell>
                     <TableCell className="text-right">
                       <div className="flex justify-end gap-2 items-center">
                         <button

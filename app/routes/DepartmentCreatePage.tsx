@@ -1,5 +1,5 @@
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
-import TestTypeForm from "~/features/TestTypes/TestTypeForm";
 import {
   Card,
   CardContent,
@@ -7,12 +7,12 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import useTestTypeForm, {
-  type TestTypeFormValues,
-} from "~/features/TestTypes/hooks/useTestTypeForm";
-import { useAddTestTypeMutation } from "~/features/TestTypes/hooks/api/addTestTypeMutation";
+import { useAddDepartmentMutation } from "~/features/Department/hooks/api/useAddDepartmentMutation";
+import useDepartmentForm from "~/features/Department/hooks/useDepartmentForm";
+import DepartmentForm from "~/features/Department/components/TestTypeForm";
+import type { DepartmentFormValues } from "types/form/DepartmentFormValues";
 
-export default function TestTypeCreatePage() {
+export default function DepartmentCreatePage() {
   const {
     register,
     handleSubmit,
@@ -21,18 +21,18 @@ export default function TestTypeCreatePage() {
     watch,
     reset,
     formState: { errors, isSubmitting },
-  } = useTestTypeForm();
-  const { mutateAsync: addTestType, isPending } = useAddTestTypeMutation();
-
+  } = useDepartmentForm();
+  const { mutateAsync: addDepartment, isPending } = useAddDepartmentMutation();
   const navigate = useNavigate();
 
-  const onSubmit = async (data: TestTypeFormValues) => {
+  const onSubmit = async (data: DepartmentFormValues) => {
     try {
-      await addTestType(data);
-      console.log("Toasting");
+      await addDepartment(data);
+      toast.success("Medical Department created successfully");
       reset();
-      navigate("/medical_department");
+      navigate("/department");
     } catch (error) {
+      toast.error("Failed to create medical department");
       console.error("Failed to create test type:", error);
     }
   };
@@ -46,7 +46,7 @@ export default function TestTypeCreatePage() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <TestTypeForm
+        <DepartmentForm
           register={register}
           handleSubmit={handleSubmit}
           control={control}

@@ -1,5 +1,5 @@
-import { FilePlus } from "lucide-react";
-import { Link, useNavigate } from "react-router";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 import {
   Card,
   CardContent,
@@ -8,6 +8,7 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import { ContainerForm } from "~/features/Containers/components/ContainerForm";
+import { useAddContainerMutation } from "~/features/Containers/hooks/api/addContainersMutation";
 import {
   useContainerForm,
   type ContainerFormValues,
@@ -25,20 +26,21 @@ export default function ContainerCreatePage() {
   } = useContainerForm();
 
   const navigate = useNavigate();
+  const { mutateAsync } = useAddContainerMutation();
 
   const onSubmit = async (formData: ContainerFormValues) => {
     try {
       console.log("Submitting container data:", formData);
 
-      // Add your API call here
-      // await createContainer(formData);
-
-      // Reset form on success
+      await mutateAsync(formData);
+      toast.success("Container created successfully!");
       reset();
 
       // Navigate or show success message
-      // navigate("/containers");
+      navigate("/containers");
     } catch (error) {
+      toast.error("Failed to create container. Please try again.");
+
       console.error("Failed to create container:", error);
       // Handle error (show toast, etc.)
     }

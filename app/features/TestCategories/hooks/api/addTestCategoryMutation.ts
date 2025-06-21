@@ -1,6 +1,5 @@
 // ~/hooks/api/addTestMutation.ts
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
 import type { TestCategoryFormValues } from "../useTestCategoryForm";
 import { TestCategoriesQueryKey } from "./useTestCategoriesData";
 import axiosInstance from "~/lib/axiosInstance";
@@ -10,7 +9,7 @@ export const useAddTestCategoryMutation = () => {
 
   return useMutation({
     mutationFn: async (formData: TestCategoryFormValues) => {
-      const response = await axiosInstance.post("/tests/categories", {
+      const response = await axiosInstance.post("/test-categories", {
         ...formData,
       });
       console.log(response.data);

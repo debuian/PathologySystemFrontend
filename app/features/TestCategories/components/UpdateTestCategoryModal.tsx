@@ -3,13 +3,12 @@ import {
   DialogDescription,
   DialogTitle,
 } from "~/components/ui/dialog";
-import useTestCategoryForm, {
-  type TestCategoryFormValues,
-} from "../hooks/useTestCategoryForm";
 import { useNavigate } from "react-router";
 import useUpdateTestCategory from "../hooks/api/useUpdateTestCategoryMutation";
 import TestCategoryForm from "./TestCategoryForm";
 import { useEffect } from "react";
+import type { TestCategoryFormValues } from "types/form/TestCategoryFormValues";
+import useTestCategoryForm from "../hooks/useTestCategoryForm";
 
 interface updateTestCategoryModalProps {
   id: string;

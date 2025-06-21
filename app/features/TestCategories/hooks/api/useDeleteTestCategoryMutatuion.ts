@@ -1,8 +1,4 @@
-import {
-  QueryClient,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "~/lib/axiosInstance";
 import { TestCategoriesQueryKey } from "./useTestCategoriesData";
 
@@ -11,7 +7,7 @@ const useDeleteTestCategoryMutatuion = () => {
   return useMutation({
     mutationFn: async (TestCategoryId: string) => {
       const resposne = await axiosInstance.delete(
-        `tests/categories/${TestCategoryId}`
+        `test-categories/${TestCategoryId}`
       );
       return resposne.data;
     },

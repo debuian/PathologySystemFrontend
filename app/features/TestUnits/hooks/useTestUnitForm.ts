@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import type { TestUnitFormValues } from "~/constants/types/TestUnitFormValues";
+import type { TestUnitFormValues } from "types/form/TestUnitFormValues";
 
 export const useTestUnitForm = (initialData?: TestUnitFormValues) => {
   const {

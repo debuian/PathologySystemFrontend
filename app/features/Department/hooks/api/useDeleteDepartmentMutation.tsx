@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "~/lib/axiosInstance";
-import { TestTypesQueryKey } from "./useTestTypesData";
+import { DepartmentsQueryKey } from "./useTestTypesData";
 
-const useDelDepartment = () => {
+const useDeleteDepartmentMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -14,9 +14,9 @@ const useDelDepartment = () => {
       Promise.reject(error);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: TestTypesQueryKey });
+      queryClient.invalidateQueries({ queryKey: DepartmentsQueryKey });
     },
   });
 };
 
-export default useDelDepartment;
+export default useDeleteDepartmentMutation;

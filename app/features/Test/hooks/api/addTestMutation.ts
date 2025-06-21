@@ -1,7 +1,7 @@
 // ~/hooks/api/addTestMutation.ts
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import type { TestFormValues } from "~/constants/types/TestFormValues";
+import type { TestFormValues } from "types/form/TestFormValues";
 import axiosInstance from "~/lib/axiosInstance";
 import { testsQueryKeys } from "./useTestData";
 
@@ -10,13 +10,24 @@ export const useAddTestMutation = () => {
 
   return useMutation({
     mutationFn: async (formData: TestFormValues) => {
-      const response = await axiosInstance.post("/tests", formData);
+      const payload = {
+        ...formData,
+        specimenRequirements: formData.specimenRequirements.map((specimen) => ({
+          specimenId: Number(specimen.specimenId),
+          containerId: Number(specimen.containerId),
+        })),
+        categoryIds: formData.categoryIds.map(Number),
+        medicalDepartmentId: Number(formData.medicalDepartmentId),
+        testUnitId: Number(formData.testUnitId),
+      };
+
+      console.log("Submitting payload:", payload);
+
+      const response = await axiosInstance.post("/tests", payload);
       console.log(response.data);
       return response.data;
-      //   return new Promise((resolve, rejects) => {
-      //     setTimeout(() => resolve(response.data), 4000);
-      //   });
     },
+
     onError: (error) => {
       console.error("Error creating test:", error);
     },

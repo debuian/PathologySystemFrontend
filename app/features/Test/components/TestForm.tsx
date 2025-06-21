@@ -22,7 +22,7 @@ import {
   SelectValue,
 } from "~/components/ui/select";
 import { cn } from "~/lib/utlis";
-import type { TestFormValues } from "~/constants/types/TestFormValues";
+import type { TestFormValues } from "types/form/TestFormValues";
 import { useTestCategoriesData } from "~/features/TestCategories/hooks/api/useTestCategoriesData";
 import {
   Controller,
@@ -36,11 +36,13 @@ import {
   type UseFormSetValue,
   type UseFormWatch,
 } from "react-hook-form";
-import { useTestTypesData } from "../../TestTypes/hooks/api/useTestTypesData";
-import { useTestUnitsData } from "../../TestUnits/hooks/api/useUnitsData";
+import { useTestUnitsData } from "../../TestUnits/hooks/api/useTestUnitsData";
 import ReferenceRangesForm from "./ReferenceRangesForm";
 import { Button } from "~/components/ui/button";
-import { useSpecimensData } from "~/features/Specimen/hooks/api/useSpecimenData";
+import SpecimenRequirementForm from "./specimenRequirementForm";
+import { Card } from "~/components/ui/card";
+import { useResultValueTypeData } from "~/features/ResultValueTypes/hooks/api/useResultValueTypeData";
+import { useDepartmentsData } from "~/features/Department/hooks/api/useTestTypesData";
 
 interface TestFormProps {
   register: UseFormRegister<TestFormValues>;
@@ -57,6 +59,18 @@ interface TestFormProps {
     append: UseFieldArrayAppend<TestFormValues, "referenceRanges">;
     remove: UseFieldArrayRemove;
   };
+  specimenRequirements: {
+    specimenRequirementFields: FieldArrayWithId<
+      TestFormValues,
+      "specimenRequirements",
+      "id"
+    >[];
+    specimenRequirementAppend: UseFieldArrayAppend<
+      TestFormValues,
+      "specimenRequirements"
+    >;
+    specimenRequirementRemove: UseFieldArrayRemove;
+  };
 }
 
 export const TestForm = ({
@@ -70,15 +84,20 @@ export const TestForm = ({
   onSubmit,
   submitButtonText = "Create Test",
   referenceRanges: { fields, append, remove },
+  specimenRequirements: {
+    specimenRequirementFields,
+    specimenRequirementAppend,
+    specimenRequirementRemove,
+  },
 }: TestFormProps) => {
   const { data: testUnits } = useTestUnitsData();
-  const { data: testTypes } = useTestTypesData();
+  const { data: Departments } = useDepartmentsData();
   const { data: categories } = useTestCategoriesData();
-  const { data: specimenData } = useSpecimensData();
+  const { data: resultValueTypes } = useResultValueTypeData();
   const [openCategoriesPopover, setOpenCategoriesPopover] = useState(false);
   const categoryIds = watch("categoryIds");
 
-  const handleCategoryToggle = (categoryId: string) => {
+  const handleCategoryToggle = (categoryId: number) => {
     const currentCategories = categoryIds || [];
     const newCategories = currentCategories.includes(categoryId)
       ? currentCategories.filter((id) => id !== categoryId)
@@ -158,7 +177,7 @@ export const TestForm = ({
             render={({ field }) => {
               return (
                 <Select
-                  value={field.value}
+                  value={String(field.value)}
                   onValueChange={(value) => {
                     field.onChange(value);
                   }}
@@ -192,18 +211,18 @@ export const TestForm = ({
             rules={{ required: "Medical Department is required" }}
             render={({ field }) => (
               <Select
-                value={field.value}
+                value={String(field.value)}
                 onValueChange={(value) => {
                   field.onChange(value);
                 }}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Select a type">
-                    {testTypes?.find((type) => type.id === field.value)?.name}
+                    {Departments?.find((type) => type.id === field.value)?.name}
                   </SelectValue>
                 </SelectTrigger>
                 <SelectContent>
-                  {testTypes?.map((type) => (
+                  {Departments?.map((type) => (
                     <SelectItem key={type.id} value={String(type.id)}>
                       {type.name}
                     </SelectItem>
@@ -214,35 +233,7 @@ export const TestForm = ({
           />
         </div>
       </div>
-      <div className="space-y-2">
-        <label htmlFor="specimenId">Department</label>
-        <Controller
-          name="specimenId"
-          control={control}
-          rules={{ required: "specimen is required" }}
-          render={({ field }) => (
-            <Select
-              value={field.value}
-              onValueChange={(value) => {
-                field.onChange(value);
-              }}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Select a specimen">
-                  {testTypes?.find((type) => type.id === field.value)?.name}
-                </SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                {specimenData?.map((specimen) => (
-                  <SelectItem key={specimen.id} value={String(specimen.id)}>
-                    {specimen.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          )}
-        />
-      </div>
+
       <div className="space-y-2">
         <label className="block text-gray-700 text-sm font-bold mb-2">
           Categories (Select multiple)
@@ -299,35 +290,95 @@ export const TestForm = ({
         </Popover>
       </div>
 
-      {fields.map((field, index) => {
-        return (
-          <ReferenceRangesForm
-            index={index}
-            errors={errors}
-            register={register}
-            onRemove={remove}
-          />
-        );
-      })}
-      <Button
-        variant={"outline"}
-        className="w-min p-2"
-        type="button"
-        onClick={() =>
-          append({
-            age_min_years: "",
-            age_max_years: "",
-            gender: "male",
-            normal_min: "",
-            normal_max: "",
-            critical_min: "",
-            critical_max: "",
-            notes: "",
-          })
-        }
-      >
-        Add Range
-      </Button>
+      <div className="space-y-2">
+        <label className="block text-gray-700 text-sm font-bold mb-2">
+          Result Vaue Type
+        </label>
+        <Controller
+          name="resultValueTypeId"
+          control={control}
+          rules={{ required: "Result value type is required" }}
+          render={({ field }) => (
+            <Select
+              value={String(field.value)}
+              onValueChange={(value) => field.onChange(value)}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select a type" />
+              </SelectTrigger>
+              <SelectContent>
+                {resultValueTypes?.map((type) => (
+                  <SelectItem key={type.id} value={String(type.id)}>
+                    {type.name}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        />
+      </div>
+      {/* Specimen Requirements Section */}
+      <Card className="p-4 space-y-4">
+        {specimenRequirementFields.map((field, index) => {
+          return (
+            <SpecimenRequirementForm
+              key={field.id}
+              index={index}
+              errors={errors}
+              register={register}
+              onRemove={() => specimenRequirementRemove(index)}
+              control={control}
+            />
+          );
+        })}
+        <Button
+          variant={"outline"}
+          className="w-min p-2"
+          type="button"
+          onClick={() =>
+            specimenRequirementAppend({
+              specimenId: 0,
+              containerId: 0,
+            })
+          }
+        >
+          Add Specimen Requirement
+        </Button>
+      </Card>
+
+      {/* Reference Rnages Section */}
+      <Card className="p-4 space-y-4">
+        {fields.map((field, index) => {
+          return (
+            <ReferenceRangesForm
+              key={field.id}
+              index={index}
+              errors={errors}
+              register={register}
+              onRemove={() => remove(index)}
+            />
+          );
+        })}
+        <Button
+          variant={"outline"}
+          className="w-min p-2"
+          type="button"
+          onClick={() =>
+            append({
+              age_min_years: "",
+              age_max_years: "",
+              gender: "male",
+              normal_min: "",
+              normal_max: "",
+              critical_min: "",
+              critical_max: "",
+              notes: "",
+            })
+          }
+        >
+          Add Range
+        </Button>
+      </Card>
       <button
         type="submit"
         disabled={isSubmitting}

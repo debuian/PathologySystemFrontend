@@ -2,7 +2,7 @@ import { useNavigate } from "react-router";
 import { TestForm } from "~/features/Test/components/TestForm";
 import { useAddTestMutation } from "~/features/Test/hooks/api/addTestMutation";
 import { useTestForm } from "~/features/Test/hooks/useTestForm";
-import type { TestFormValues } from "~/constants/types/TestFormValues";
+import type { TestFormValues } from "types/form/TestFormValues";
 import {
   Card,
   CardContent,
@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import toast from "react-hot-toast";
 
 export default function TestCreatePage() {
   const {
@@ -21,6 +22,11 @@ export default function TestCreatePage() {
     reset,
     formState: { errors, isSubmitting },
     referenceRanges: { fields, append, remove },
+    specimenRequirements: {
+      specimenRequirementFields,
+      specimenRequirementAppend,
+      specimenRequirementRemove,
+    },
   } = useTestForm();
 
   const navigate = useNavigate();
@@ -31,9 +37,9 @@ export default function TestCreatePage() {
     console.log(formData);
     try {
       await addTest(formData);
-      console.log("Toasting");
+      toast.success("Test created successfully!");
       reset();
-      navigate("/tests");
+      navigate("/tests/categories");
       console.log("Redirecting");
     } catch (error) {
       console.error("Failed to create test:", error);
@@ -58,6 +64,11 @@ export default function TestCreatePage() {
           onSubmit={onSubmit}
           submitButtonText="Create Test"
           referenceRanges={{ fields, append, remove }}
+          specimenRequirements={{
+            specimenRequirementFields,
+            specimenRequirementAppend,
+            specimenRequirementRemove,
+          }}
         />
       </CardContent>
     </Card>

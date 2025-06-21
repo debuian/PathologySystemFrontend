@@ -1,8 +1,6 @@
 import { useForm } from "react-hook-form";
+import type { ContainerFormValues } from "types/form/ContainerFormValues";
 
-export interface ContainerFormValues {
-  name: string;
-}
 export const useContainerForm = (initialData?: ContainerFormValues) => {
   const {
     register,

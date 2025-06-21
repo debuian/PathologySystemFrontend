@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { TestTypeFormValues } from "../useTestTypeForm";
 import axiosInstance from "~/lib/axiosInstance";
-import { TestTypesQueryKey } from "./useTestTypesData";
+import { DepartmentsQueryKey } from "./useTestTypesData";
+import type { DepartmentFormValues } from "../useDepartmentForm";
 
 const useUpdateDepartment = (id: string) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (data: TestTypeFormValues) => {
+    mutationFn: async (data: DepartmentFormValues) => {
       const response = await axiosInstance.patch(
         `/medical_departments/${id}`,
         data
@@ -17,7 +17,7 @@ const useUpdateDepartment = (id: string) => {
       Promise.reject(error);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: TestTypesQueryKey });
+      queryClient.invalidateQueries({ queryKey: DepartmentsQueryKey });
     },
   });
 };

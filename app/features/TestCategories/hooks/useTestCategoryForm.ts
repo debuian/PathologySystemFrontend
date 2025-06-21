@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
-export interface TestCategoryFormValues {
-  name: string;
-}
+import type { TestCategoryFormValues } from "types/form/TestCategoryFormValues";
+
 const useTestCategoryForm = (initialData?: TestCategoryFormValues) => {
   const {
     register,

@@ -17,7 +17,7 @@ import {
   TableCell,
 } from "~/components/ui/table";
 import { useTestsData } from "~/features/Test/hooks/api/useTestData";
-import type { TestFormValues } from "~/constants/types/TestFormValues";
+import type { TestFormValues } from "types/form/TestFormValues";
 import {
   DialogContent,
   DialogTitle,
@@ -213,10 +213,14 @@ export default function Test() {
                   (category) => category.category.id
                 ),
                 referenceRanges: test.referenceRanges,
-                specimenId: test.specimenRequirements?.[0]?.specimen?.id || "",
+                specimenRequirements: test.specimenRequirements.map((sr) => ({
+                  specimenId: sr.specimen.id,
+                  containerId: sr.container.id,
+                })),
               };
               return (
                 <TestCard
+                  key={test.id}
                   test={test}
                   onEdit={() => {
                     setIsOpen(true);

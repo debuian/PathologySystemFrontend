@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { TestForm } from "~/features/Test/components/TestForm";
-import type { TestFormValues } from "~/constants/types/TestFormValues";
+import type { TestFormValues } from "types/form/TestFormValues";
 import { useUpdateTestMutation } from "~/features/Test/hooks/api/updateTestMutation";
 import { useTestForm } from "~/features/Test/hooks/useTestForm";
 
@@ -21,6 +21,11 @@ const TestEdit = ({ initialData, dataId, ModalCLoseFn }: TestEditProps) => {
     reset,
     formState: { errors, isSubmitting },
     referenceRanges: { fields, append, remove },
+    specimenRequirements: {
+      specimenRequirementFields,
+      specimenRequirementAppend,
+      specimenRequirementRemove,
+    },
   } = useTestForm(initialData);
 
   const { mutateAsync: updateTest, isPending: isAddTestPending } =
@@ -52,6 +57,11 @@ const TestEdit = ({ initialData, dataId, ModalCLoseFn }: TestEditProps) => {
       onSubmit={onSubmit}
       submitButtonText="Edit Test"
       referenceRanges={{ fields, append, remove }}
+      specimenRequirements={{
+        specimenRequirementFields,
+        specimenRequirementAppend,
+        specimenRequirementRemove,
+      }}
     />
   );
 };

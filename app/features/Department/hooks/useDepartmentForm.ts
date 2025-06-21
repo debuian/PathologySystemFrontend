@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 
-export interface TestTypeFormValues {
+export interface DepartmentFormValues {
   name: string;
 }
-const useTestTypeForm = (initialData?: TestTypeFormValues) => {
+const useDepartmentForm = (initialData?: DepartmentFormValues) => {
   const {
     register,
     handleSubmit,
@@ -12,7 +12,7 @@ const useTestTypeForm = (initialData?: TestTypeFormValues) => {
     watch,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<TestTypeFormValues>({
+  } = useForm<DepartmentFormValues>({
     defaultValues: initialData || {
       name: "",
     },
@@ -29,4 +29,4 @@ const useTestTypeForm = (initialData?: TestTypeFormValues) => {
   };
 };
 
-export default useTestTypeForm;
+export default useDepartmentForm;

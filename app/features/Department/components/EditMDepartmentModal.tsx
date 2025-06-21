@@ -3,15 +3,17 @@ import {
   DialogDescription,
   DialogTitle,
 } from "~/components/ui/dialog";
-import type { TestTypeFormValues } from "./hooks/useTestTypeForm";
-import type { TestType } from "./hooks/api/useTestTypesData";
-import useTestTypeForm from "./hooks/useTestTypeForm";
+
+import useUpdateDepartment from "../hooks/api/useUpdateDepartment";
+import type { Department } from "~/constants/types/api/Department";
 import { useNavigate } from "react-router";
-import TestTypeForm from "./TestTypeForm";
-import useUpdateDepartment from "./hooks/api/useUpdateDepartment";
+import useDepartmentForm, {
+  type DepartmentFormValues,
+} from "../hooks/useDepartmentForm";
+import DepartmentForm from "./TestTypeForm";
 
 interface Props {
-  data: TestType;
+  data: Department;
   ModalCloseFn: () => void;
 }
 const EditMDepartmentModal = ({ data, ModalCloseFn }: Props) => {
@@ -26,10 +28,12 @@ const EditMDepartmentModal = ({ data, ModalCloseFn }: Props) => {
     watch,
     reset,
     formState: { errors, isSubmitting },
-  } = useTestTypeForm(FormData);
+  } = useDepartmentForm(FormData);
 
-  const { mutateAsync: UpdateDepartment, isPending } = useUpdateDepartment(id);
-  const onSubmit = async (formData: TestTypeFormValues) => {
+  const { mutateAsync: UpdateDepartment, isPending } = useUpdateDepartment(
+    String(id)
+  );
+  const onSubmit = async (formData: DepartmentFormValues) => {
     try {
       await UpdateDepartment(formData);
       console.log("Toasting");
@@ -46,7 +50,7 @@ const EditMDepartmentModal = ({ data, ModalCloseFn }: Props) => {
     <DialogContent>
       <DialogTitle>Delete</DialogTitle>
       <DialogDescription>Edit the Test Units Details</DialogDescription>
-      <TestTypeForm
+      <DepartmentForm
         register={register}
         handleSubmit={handleSubmit}
         control={control}

@@ -1,13 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
+import type { Specimen } from "types/api/Specimen";
 import axiosInstance from "~/lib/axiosInstance";
 
-export interface SpecimenData {
-  id: string;
-  name: string;
-}
-
 const fetchSpecimens = async () => {
-  const response = await axiosInstance.get<SpecimenData[]>("/test-specimens");
+  const response = await axiosInstance.get<Specimen[]>("/test-specimens");
   return response.data;
 };
 

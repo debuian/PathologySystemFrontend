@@ -1,5 +1,5 @@
+import type { TestCategory } from "types/api/TestCategory";
 import useDeleteTestCategoryMutatuion from "../hooks/api/useDeleteTestCategoryMutatuion";
-import type { TestCategory } from "../hooks/api/useTestCategoriesData";
 import {
   DialogContent,
   DialogDescription,
@@ -16,7 +16,7 @@ const DeleteTestCategoryModal = ({
   const { mutateAsync, isPending } = useDeleteTestCategoryMutatuion();
 
   const deleteFn = () => {
-    mutateAsync(data.id);
+    mutateAsync(String(data.id));
     ModalCloseFn();
   };
 

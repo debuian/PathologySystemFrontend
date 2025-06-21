@@ -6,20 +6,20 @@ import type {
   UseFormSetValue,
   UseFormWatch,
 } from "react-hook-form";
-import type { TestUnitFormValues } from "~/constants/types/TestUnitFormValues";
+import type { DepartmentFormValues } from "../hooks/useDepartmentForm";
 
 interface TestUnitFormProps {
-  register: UseFormRegister<TestUnitFormValues>;
-  handleSubmit: UseFormHandleSubmit<TestUnitFormValues, TestUnitFormValues>;
-  control: Control<TestUnitFormValues, any, TestUnitFormValues>;
-  setValue: UseFormSetValue<TestUnitFormValues>;
-  watch: UseFormWatch<TestUnitFormValues>;
-  errors: FieldErrors<TestUnitFormValues>;
+  register: UseFormRegister<DepartmentFormValues>;
+  handleSubmit: UseFormHandleSubmit<DepartmentFormValues, DepartmentFormValues>;
+  control: Control<DepartmentFormValues, any, DepartmentFormValues>;
+  setValue: UseFormSetValue<DepartmentFormValues>;
+  watch: UseFormWatch<DepartmentFormValues>;
+  errors: FieldErrors<DepartmentFormValues>;
   isSubmitting: boolean;
-  onSubmit: (data: TestUnitFormValues) => Promise<void>;
+  onSubmit: (data: DepartmentFormValues) => Promise<void>;
   submitButtonText?: string;
 }
-const TestUnitForm = ({
+const DepartmentForm = ({
   register,
   handleSubmit,
   control,
@@ -28,9 +28,9 @@ const TestUnitForm = ({
   errors,
   isSubmitting,
   onSubmit,
-  submitButtonText = "Create Test Unit",
+  submitButtonText = "Create",
 }: TestUnitFormProps) => {
-  const formSubmit = async (data: TestUnitFormValues) => {
+  const formSubmit = async (data: DepartmentFormValues) => {
     try {
       await onSubmit(data);
     } catch (error) {}
@@ -42,13 +42,13 @@ const TestUnitForm = ({
           className="block text-gray-700 text-sm font-bold mt-2 mb-2"
           htmlFor="test-name"
         >
-          Test Unit Name
+          Medical Department Name
         </label>
         <input
           type="text"
           id="test-name"
-          {...register("name", { required: "Test Unit name is required" })}
-          placeholder="Enter test name"
+          {...register("name", { required: "Test Types name is required" })}
+          placeholder="Enter medical department name"
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
         {errors.name && (
@@ -66,4 +66,4 @@ const TestUnitForm = ({
   );
 };
 
-export default TestUnitForm;
+export default DepartmentForm;

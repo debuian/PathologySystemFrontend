@@ -3,18 +3,18 @@ import {
   DialogDescription,
   DialogTitle,
 } from "~/components/ui/dialog";
-import type { TestType } from "./hooks/api/useTestTypesData";
-import useDelDepartment from "./hooks/api/useDelDepartment";
+import type { Department } from "~/constants/types/api/Department";
+import useDeleteDepartmentMutation from "../hooks/api/useDeleteDepartmentMutation";
 
 interface Props {
-  Depdata: TestType;
+  Depdata: Department;
   ModalCloseFn: () => void;
 }
 const DeleteMDepartmentModal = ({ Depdata, ModalCloseFn }: Props) => {
   const { id, ...data } = Depdata;
-  const { mutateAsync: deleteDepartment } = useDelDepartment();
+  const { mutateAsync: deleteDepartment } = useDeleteDepartmentMutation();
   const deleteFn = () => {
-    deleteDepartment(id);
+    deleteDepartment(String(id));
     ModalCloseFn();
   };
   return (

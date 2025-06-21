@@ -1,8 +1,3 @@
-import {
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-} from "~/components/ui/dialog";
 import { Edit, FilePlus, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router";
@@ -16,12 +11,10 @@ import {
   TableCell,
   TableBody,
 } from "~/components/ui/table";
-import TestUnitEdit from "~/features/TestUnits/TestUnitEdit";
-import {
-  useTestUnitsData,
-  type TestUnit,
-} from "~/features/TestUnits/hooks/api/useUnitsData";
-import TestUnitDeleteModal from "~/features/TestUnits/TestUnitDeleteModal";
+import TestUnitDeleteModal from "~/features/TestUnits/components/TestUnitDeleteModal";
+import type { TestUnit } from "types/api/TestUnit";
+import { useTestUnitsData } from "~/features/TestUnits/hooks/api/useTestUnitsData";
+import TestUnitEditModal from "~/features/TestUnits/components/TestUnitEditModal";
 
 export default function TestUnitsPage() {
   const { data } = useTestUnitsData();
@@ -33,24 +26,15 @@ export default function TestUnitsPage() {
       <Modal open={isOpen} setOpen={setIsOpen}>
         {selectedUnit ? (
           action == "update" ? (
-            <DialogContent>
-              <DialogTitle>Edit</DialogTitle>
-              <DialogDescription>Edit the Test Units Details</DialogDescription>
-              {selectedUnit && (
-                <TestUnitEdit
-                  initialData={(() => {
-                    const { id, ...rest } = selectedUnit;
-                    return rest;
-                  })()}
-                  dataId={selectedUnit.id}
-                  ModalCLoseFn={() => setIsOpen(false)}
-                />
-              )}
-            </DialogContent>
+            <TestUnitEditModal
+              selectedUnit={selectedUnit}
+              ModalCLoseFn={() => setIsOpen(false)}
+            />
           ) : (
+            //
             <TestUnitDeleteModal
               name={selectedUnit?.name}
-              id={selectedUnit.id}
+              id={String(selectedUnit?.id)}
               ModalCLoseFn={() => setIsOpen(false)}
             />
           )

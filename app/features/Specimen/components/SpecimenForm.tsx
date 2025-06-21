@@ -1,16 +1,12 @@
 import {
-  Controller,
   type Control,
-  type FieldArrayWithId,
   type FieldErrors,
-  type UseFieldArrayAppend,
-  type UseFieldArrayRemove,
   type UseFormHandleSubmit,
   type UseFormRegister,
   type UseFormSetValue,
   type UseFormWatch,
 } from "react-hook-form";
-import type { SpecimenFormValues } from "../hooks/useSpecimenForm";
+import type { SpecimenFormValues } from "types/form/SpecimenFormValues";
 import { Button } from "~/components/ui/button";
 
 interface SpecimenFormProps {
@@ -28,9 +24,6 @@ interface SpecimenFormProps {
 const SpecimenForm = ({
   register,
   handleSubmit,
-  control,
-  setValue,
-  watch,
   errors,
   isSubmitting,
   onSubmit,
@@ -48,12 +41,12 @@ const SpecimenForm = ({
           className="block text-gray-700 text-sm font-bold mt-2 mb-2"
           htmlFor="name"
         >
-          Test Name
+          Specimen Name
         </label>
         <input
           type="text"
           id="name"
-          {...register("name", { required: "Test name is required" })}
+          {...register("name", { required: "Specimen name is required" })}
           placeholder="Enter test name"
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
@@ -62,24 +55,6 @@ const SpecimenForm = ({
         )}
       </div>
 
-      {/* <div className="space-y-2">
-        <label
-          className="block text-gray-700 text-sm font-bold mt-2 mb-2"
-          htmlFor="storage"
-        >
-          Test Name
-        </label>
-        <input
-          type="text"
-          id="storage"
-          {...register("storage", { required: "Test name is required" })}
-          placeholder="Enter storage name"
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        />
-        {errors.storage && (
-          <p className="text-red-500 text-xs ">{errors.storage.message}</p>
-        )}
-      </div> */}
       <Button
         type="submit"
         disabled={isSubmitting}

@@ -6,20 +6,20 @@ import type {
   UseFormSetValue,
   UseFormWatch,
 } from "react-hook-form";
-import type { TestTypeFormValues } from "~/features/TestTypes/hooks/useTestTypeForm";
+import type { TestUnitFormValues } from "types/form/TestUnitFormValues";
 
 interface TestUnitFormProps {
-  register: UseFormRegister<TestTypeFormValues>;
-  handleSubmit: UseFormHandleSubmit<TestTypeFormValues, TestTypeFormValues>;
-  control: Control<TestTypeFormValues, any, TestTypeFormValues>;
-  setValue: UseFormSetValue<TestTypeFormValues>;
-  watch: UseFormWatch<TestTypeFormValues>;
-  errors: FieldErrors<TestTypeFormValues>;
+  register: UseFormRegister<TestUnitFormValues>;
+  handleSubmit: UseFormHandleSubmit<TestUnitFormValues, TestUnitFormValues>;
+  control: Control<TestUnitFormValues, any, TestUnitFormValues>;
+  setValue: UseFormSetValue<TestUnitFormValues>;
+  watch: UseFormWatch<TestUnitFormValues>;
+  errors: FieldErrors<TestUnitFormValues>;
   isSubmitting: boolean;
-  onSubmit: (data: TestTypeFormValues) => Promise<void>;
+  onSubmit: (data: TestUnitFormValues) => Promise<void>;
   submitButtonText?: string;
 }
-const TestTypeForm = ({
+const TestUnitForm = ({
   register,
   handleSubmit,
   control,
@@ -30,7 +30,7 @@ const TestTypeForm = ({
   onSubmit,
   submitButtonText = "Create",
 }: TestUnitFormProps) => {
-  const formSubmit = async (data: TestTypeFormValues) => {
+  const formSubmit = async (data: TestUnitFormValues) => {
     try {
       await onSubmit(data);
     } catch (error) {}
@@ -42,13 +42,13 @@ const TestTypeForm = ({
           className="block text-gray-700 text-sm font-bold mt-2 mb-2"
           htmlFor="test-name"
         >
-          Medical Department Name
+          Test Unit Name
         </label>
         <input
           type="text"
           id="test-name"
-          {...register("name", { required: "Test Types name is required" })}
-          placeholder="Enter medical department name"
+          {...register("name", { required: "Test Unit name is required" })}
+          placeholder="Enter test name"
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
         {errors.name && (
@@ -66,4 +66,4 @@ const TestTypeForm = ({
   );
 };
 
-export default TestTypeForm;
+export default TestUnitForm;

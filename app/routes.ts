@@ -9,11 +9,8 @@ export default [
   index("routes/Home.tsx"),
   layout("layout/AdminLayout.tsx", [
     route("admin", "routes/Dashboard.tsx"),
-    route("medical_department", "routes/MedicalDepartmentPage.tsx"),
-    route(
-      "medical_department/create",
-      "routes/MedicalDepartmentCreatePage.tsx"
-    ),
+    route("department", "routes/DepartmentPage.tsx"),
+    route("department/create", "routes/DepartmentCreatePage.tsx"),
     route("tests", "routes/TestsPage.tsx"),
     route("tests/create", "routes/TestCreatePage.tsx"),
     route("tests/units", "routes/TestUnitsPage.tsx"),

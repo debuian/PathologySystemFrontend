@@ -1,19 +1,17 @@
 // ~/hooks/api/addTestMutation.ts
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
-import { TestUnitsQueryKey } from "./useUnitsData";
-import type { TestUnitFormValues } from "~/constants/types/TestUnitFormValues";
+import { TestUnitsQueryKey } from "./useTestUnitsData";
 import axiosInstance from "~/lib/axiosInstance";
+import type { TestUnitFormValues } from "types/form/TestUnitFormValues";
 
 export const useAddTestUnitMutation = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async (formData: TestUnitFormValues) => {
-      const response = await axiosInstance.post("/tests/units", {
+      const response = await axiosInstance.post("/test-units", {
         ...formData,
       });
-      console.log(response.data);
       return response.data;
     },
     onError: (error) => {

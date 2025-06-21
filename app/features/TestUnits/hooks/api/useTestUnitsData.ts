@@ -1,21 +1,15 @@
 // src/hooks/useUnitsData.ts
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import type { TestUnit } from "types/api/TestUnit";
 import axiosInstance from "~/lib/axiosInstance";
 
-// Define the type for your data
-export interface TestUnit {
-  id: string;
-  name: string;
-  // Add other properties based on your API response
-}
+export const TestUnitsQueryKey = ["test", "units"] as const;
 
 // Function to fetch data
-const fetchTestUnits = async (): Promise<TestUnit[]> => {
-  const response = await axiosInstance.get("/test-units");
+const fetchTestUnits = async () => {
+  const response = await axiosInstance.get<TestUnit[]>("/test-units");
   return response.data;
 };
-export const TestUnitsQueryKey = ["test", "units"];
 
 // Custom hook
 export function useTestUnitsData() {

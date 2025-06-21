@@ -1,16 +1,18 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { TestUnitFormValues } from "~/constants/types/TestUnitFormValues";
+import type { TestUnitFormValues } from "types/form/TestUnitFormValues";
 import axiosInstance from "~/lib/axiosInstance";
-import { TestUnitsQueryKey } from "./useUnitsData";
+import { TestUnitsQueryKey } from "./useTestUnitsData";
 
-const useTestUpdateMutation = (id: string) => {
+interface UseTestUpdateMutation {
+  id: string;
+  data: TestUnitFormValues;
+}
+
+const useTestUpdateMutation = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async (formData: TestUnitFormValues) => {
-      const response = await axiosInstance.patch(
-        `/tests/units/${id}`,
-        formData
-      );
+    mutationFn: async ({ data, id }: UseTestUpdateMutation) => {
+      const response = await axiosInstance.patch(`/test-units/${id}`, data);
       return response.data;
     },
     onError: (error) => {

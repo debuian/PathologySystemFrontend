@@ -1,20 +1,19 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axiosInstance from "~/lib/axiosInstance";
-import type { TestCategoryFormValues } from "../useTestCategoryForm";
 import { TestCategoriesQueryKey } from "./useTestCategoriesData";
+import type { TestCategoryFormValues } from "types/form/TestCategoryFormValues";
+
+interface props {
+  id: string;
+  data: TestCategoryFormValues;
+}
 
 const useUpdateTestCategory = () => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: async ({
-      id,
-      data,
-    }: {
-      id: string;
-      data: TestCategoryFormValues;
-    }) => {
+    mutationFn: async ({ id, data }: props) => {
       const response = await axiosInstance.patch(
-        `/tests/categories/${id}`,
+        `/test-categories/${id}`,
         data
       );
       return response.data;

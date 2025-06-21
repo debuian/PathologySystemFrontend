@@ -1,4 +1,4 @@
-import type { TestUnitFormValues } from "~/constants/types/TestUnitFormValues";
+import type { TestUnitFormValues } from "types/form/TestUnitFormValues";
 import { useNavigate } from "react-router";
 import {
   Card,
@@ -9,7 +9,7 @@ import {
 } from "~/components/ui/card";
 import { useTestUnitForm } from "~/features/TestUnits/hooks/useTestUnitForm";
 import { useAddTestUnitMutation } from "~/features/TestUnits/hooks/api/addTestUnitMutation";
-import TestUnitForm from "~/features/TestUnits/TestUnitForm";
+import TestUnitForm from "~/features/TestUnits/components/TestUnitForm";
 import { Button } from "~/components/ui/button";
 
 export default function TestUnitCreate() {

@@ -27,8 +27,8 @@ const navItems = [
     icon: <TestTubeDiagonal size={16} strokeWidth={1.5} />,
   },
   {
-    path: "/medical_department",
-    label: "Medical Department",
+    path: "/department",
+    label: "Department",
     icon: <TestTubeDiagonal size={16} strokeWidth={1.5} />,
   },
   {
